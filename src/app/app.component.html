@@ -1,37 +1,52 @@
-  <h1 style="margin-left: 10px;">
-    TODO APP
-  </h1>
-
-  <div style="height: 20px;padding: 10px;">
-    <input
-    placeholder="TAREFAS: " onchange="this.value='';"
-    [(ngModel)]="tarefa.nome"
-  />
-
-  <button style="margin-left: 10px;" (click)="cadastrarUsuario()">Cadastrar</button>
+<body>
+    <h1 id="h1">
+      TODO-APP
+    </h1>
   
-  <select name="" id="" style="margin-left: 10px;" [(ngModel)]="tarefa.categoria">
-    <option value="">To do</option>
-    <option value="">Doing</option>
-    <option value="">Done</option>
-  </select>
-
-  </div>
-
-  <div *ngFor="let usuario of usuarios;index as indice;">
-    
-    <h4>
-      Código: {{(indice+1)}}
-      Usuário: {{ usuario.nome }}
-      Catégoria: {{usuario.categoria}}
-    </h4>
-
-    <select name="" id="" style="margin-left: 10px;" [(ngModel)]="tarefa.categoria">
-      <option value="">To do</option>
-      <option value="">Doing</option>
-      <option value="">Done</option>
+  
+    <div id="inputs1">
+      <input class="inputEspecifico"
+      placeholder="Tarefa: " onsubmit="this.value='';"
+      [(ngModel)]="tarefa.nome"
+    />
+    <input class="inputEspecifico"
+      placeholder="Descrição: " onsubmit="this.value='';"
+      [(ngModel)]="tarefa.descricao"
+    />
+  
+    <select class="inputEspecifico" [(ngModel)]="tarefa.categoria">
+      <option value="To do">To do</option>
+      <option value="Doing">Doing</option>
+      <option value="Done">Done</option>
     </select>
   
-    <button style="margin-left: 10px;" (click)="removerTarefa()">🗑️</button>
+    <button class="inputEspecifico" (click)="cadastrarUsuario()">Cadastrar</button>
+    
+      
   </div>
+  
+  
+  <div id="inputs2" *ngFor="let tarefa2 of tarefas;index as indice;">
+        
+    <h4>
+      Tarefa {{(indice+1)}}: {{ tarefa2.nome }}<br><br>
+      Descrição: {{tarefa2.descricao}}<br><br>
+      Categoria: {{tarefa2.categoria}}
+    </h4>
+  
+    <select name="" id="" [(ngModel)]="tarefa2.categoria">
+      <option value="To do">To do</option>
+      <option value="Doing">Doing</option>
+      <option value="Done">Done</option>
+    </select>
+  
+    <button style="margin-left: 10px;" (click)="removerTarefa(indice)">🗑️</button>
+  </div>
+  
+  <div style="position: fixed;" id="img">
+    <img src="https://logosmarcas.net/wp-content/uploads/2020/12/Batman-Logo.png" alt="">
+  </div>
+</body>
+
+  
 

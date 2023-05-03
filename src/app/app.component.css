@@ -1,0 +1,33 @@
+
+@font-face {
+    font-family:Batman1;
+    src: url(./fontes/batmfa__.ttf);
+}
+
+#h1{
+    margin: 0;
+    height: 15vh;
+    background-color:black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Batman1;
+}
+
+.inputEspecifico{
+    margin-left: 15px;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+#inputs1{
+    display: flex;
+    justify-content: center;
+    padding-top: 15px;
+}
+
+#inputs2{
+    padding-left: 15px;
+}
