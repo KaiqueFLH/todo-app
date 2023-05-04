@@ -26,26 +26,30 @@
   </div>
   
   
-  <div id="inputs2" *ngFor="let tarefa2 of tarefas;index as indice;">
-        
-    <h4>
-      Tarefa {{(indice+1)}}: {{ tarefa2.nome }}<br><br>
-      Descrição: {{tarefa2.descricao}}<br><br>
-      Categoria: {{tarefa2.categoria}}
-    </h4>
-  
-    <select name="" id="" [(ngModel)]="tarefa2.categoria">
-      <option value="To do">To do</option>
-      <option value="Doing">Doing</option>
-      <option value="Done">Done</option>
-    </select>
-  
-    <button style="margin-left: 10px;" (click)="removerTarefa(indice)">🗑️</button>
+  <div style="display: flex;flex-wrap: wrap; width: 100%;
+  justify-content: space-around;">
+    <div id="inputs2" *ngFor="let tarefa2 of tarefas;index as indice;">
+       
+        <h4 class="mostrar2">
+          Tarefa: {{ tarefa2.nome }}<br><br>
+          Descrição: {{tarefa2.descricao}}<br><br>
+          Status Atual: {{tarefa2.categoria}}
+        </h4>
+      
+      
+    
+      <select class="mostrar2" name="" id="" [(ngModel)]="tarefa2.categoria">
+        <option value="To do">To do</option>
+        <option value="Doing">Doing</option>
+        <option value="Done">Done</option>
+      </select>
+    
+      <button class="mostrar2" (click)="removerTarefa(indice)">Apagar</button>
+    </div>
   </div>
   
-  <div style="position: fixed;" id="img">
-    <img src="https://logosmarcas.net/wp-content/uploads/2020/12/Batman-Logo.png" alt="">
-  </div>
+  
+  
 </body>
 
   
