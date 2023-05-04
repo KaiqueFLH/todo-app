@@ -6,11 +6,11 @@
   
     <div id="inputs1">
       <input class="inputEspecifico"
-      placeholder="Tarefa: " onsubmit="this.value='';"
+      placeholder="Tarefa: "
       [(ngModel)]="tarefa.nome"
     />
     <input class="inputEspecifico"
-      placeholder="Descrição: " onsubmit="this.value='';"
+      placeholder="Descrição: "
       [(ngModel)]="tarefa.descricao"
     />
   
@@ -44,7 +44,7 @@
         <option value="Done">Done</option>
       </select>
     
-      <button class="mostrar2" (click)="removerTarefa(indice)">Apagar</button>
+      <button class="mostrar2" (click)="removerTarefa(indice)">Apagar 🗑️</button>
     </div>
   </div>
   

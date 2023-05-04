@@ -16,11 +16,8 @@ interface Tarefas{
 
 export class AppComponent {
 
-  ngOnInit():void{
-    this.tarefas = window.JSON.parse(localStorage.getItem("Lista de Tarefas"))
-  }
-
   tarefas:Tarefas[] = [];
+  
 
   tarefa:Tarefas={
     nome:null,
@@ -44,8 +41,6 @@ export class AppComponent {
       this.tarefa.nome=null;
       this.tarefa.descricao=null;
       this.tarefa.categoria=null;
-    
-    
   }
 
 
