@@ -53,4 +53,8 @@ export class AppComponent {
     this.tarefas.splice(indice,1)
     localStorage.setItem("Lista de Tarefas",JSON.stringify(this.tarefas))
   }
+
+  mudar():void{
+    localStorage.setItem("Lista de Tarefas",JSON.stringify(this.tarefas))
+  }
 }

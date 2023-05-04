@@ -38,7 +38,7 @@
       
       
     
-      <select class="mostrar2" name="" id="" [(ngModel)]="tarefa2.categoria">
+      <select class="mostrar2" name="" id="" [(ngModel)]="tarefa2.categoria" (change)="mudar()">
         <option value="To do">To do</option>
         <option value="Doing">Doing</option>
         <option value="Done">Done</option>
