@@ -18,55 +18,64 @@
 
 
   </div>
+  
+  <div class="categorias">
+    <h2>To do</h2>
+    <h2>Doing</h2>
+    <h2>Done</h2>
+  </div>
 
-  <div class="preFixo">
-
-    <div>
-      <div style="display: block;">
-        <h2>To do</h2>
+  <div class="preFixo" >
+    
+    <div style="border-right: solid white; width: 33.33%;">
+      <div style="display: flex; flex-direction: column;">
+        
         <div id="todo" *ngFor="let tarefa2 of tarefas; index as indice;">
           <div *ngIf="tarefa2.categoria === 'To do'">
             <h4 class="mostrar2">
-              Tarefa: {{ tarefa2.nome }}<br><br>
+              Tarefa:{{ tarefa2.nome }}<br><br>
               Descrição: {{tarefa2.descricao}}<br><br>
-              Status Atual: {{tarefa2.categoria}}
+              Status Atual: {{tarefa2.categoria}}<br>
+              
             </h4>
 
 
 
-            <select class="mostrar2" name="" id="" [(ngModel)]="tarefa2.categoria" (change)="LocalStorage()">
+            <select  name="" id="" [(ngModel)]="tarefa2.categoria" (change)="LocalStorage()">
               <option value="To do">To do</option>
               <option value="Doing">Doing</option>
               <option value="Done">Done</option>
             </select>
 
-            <button class="mostrar2" (click)="removerTarefa(indice)">Apagar 🗑️</button>
+            <button  (click)="removerTarefa(indice)">Apagar 🗑️</button><br>
+            
           </div>
         </div>
       </div>
     </div>
 
 
-    <div>
-      <div style="display: block;">
-        <h2>Doing</h2>
+    <div style="border-right: solid white; width: 33.33%;">
+      <div style="display: flex; flex-direction: column;">
+        
         <div id="todo" *ngFor="let tarefa2 of tarefas; index as indice;">
           <div *ngIf="tarefa2.categoria === 'Doing'">
             <h4 class="mostrar2">
-              Tarefa: {{ tarefa2.nome }}<br><br>
+              Tarefa:{{ tarefa2.nome }}<br><br>
               Descrição: {{tarefa2.descricao}}<br><br>
               Status Atual: {{tarefa2.categoria}}
             </h4>
 
 
 
-            <select class="mostrar2" name="" id="" [(ngModel)]="tarefa2.categoria" (change)="LocalStorage()">
+            <select name="" id="" [(ngModel)]="tarefa2.categoria" (change)="LocalStorage()">
               <option value="To do">To do</option>
               <option value="Doing">Doing</option>
               <option value="Done">Done</option>
             </select>
 
-            <button class="mostrar2" (click)="removerTarefa(indice)">Apagar 🗑️</button>
+            <button (click)="removerTarefa(indice)">Apagar 🗑️</button><br>
+
           </div>
         </div>
       </div>
@@ -75,26 +84,26 @@
 
 
 
-    <div>
-      <div style="display: block;">
-        <h2>Done</h2>
+    <div style="width: 33.33%;">
+      <div style="display: flex; flex-direction: column;">
         <div id="todo" *ngFor="let tarefa2 of tarefas; index as indice;">
           <div *ngIf="tarefa2.categoria === 'Done'">
             <h4 class="mostrar2">
-              Tarefa: {{ tarefa2.nome }}<br><br>
+              Tarefa:{{ tarefa2.nome }}<br><br>
               Descrição: {{tarefa2.descricao}}<br><br>
               Status Atual: {{tarefa2.categoria}}
             </h4>
 
 
 
-            <select class="mostrar2" name="" id="" [(ngModel)]="tarefa2.categoria" (change)="LocalStorage()">
+            <select name="" id="" [(ngModel)]="tarefa2.categoria" (change)="LocalStorage()">
               <option value="To do">To do</option>
               <option value="Doing">Doing</option>
               <option value="Done">Done</option>
             </select>
 
-            <button class="mostrar2" (click)="removerTarefa(indice)">Apagar 🗑️</button>
+            <button (click)="removerTarefa(indice)">Apagar 🗑️</button><br>
+            
           </div>
         </div>
       </div>
