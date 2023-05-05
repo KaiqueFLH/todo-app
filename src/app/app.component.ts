@@ -15,8 +15,15 @@ interface Tarefas{
 })
 
 export class AppComponent {
+  ngOnInit(): void {
+    if (localStorage.getItem('Lista de Tarefas') != null) {
+      this.tarefas = JSON.parse(localStorage.getItem('Lista de Tarefas'));
+    }
+    
+  }
 
   tarefas:Tarefas[] = [];
+ 
   
 
   tarefa:Tarefas={
@@ -35,9 +42,8 @@ export class AppComponent {
         id: this.tarefa.id++
       }
       this.tarefas.push(usuario);
-      localStorage.setItem("Lista de Tarefas",JSON.stringify(this.tarefas))
+      this.LocalStorage()
     }
-    
       this.tarefa.nome=null;
       this.tarefa.descricao=null;
       this.tarefa.categoria=null;
@@ -46,10 +52,11 @@ export class AppComponent {
 
   removerTarefa(indice):void{
     this.tarefas.splice(indice,1)
-    localStorage.setItem("Lista de Tarefas",JSON.stringify(this.tarefas))
+    this.LocalStorage()
   }
 
-  mudar():void{
+  LocalStorage(){
     localStorage.setItem("Lista de Tarefas",JSON.stringify(this.tarefas))
+
   }
 }

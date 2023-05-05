@@ -1,56 +1,108 @@
 <body>
-    <h1 id="h1">
-      TODO-APP
-    </h1>
-  
-  
-    <div id="inputs1">
-      <input class="inputEspecifico"
-      placeholder="Tarefa: "
-      [(ngModel)]="tarefa.nome"
-    />
-    <input class="inputEspecifico"
-      placeholder="Descrição: "
-      [(ngModel)]="tarefa.descricao"
-    />
-  
+  <h1 id="h1">
+    TODO-APP
+  </h1>
+
+
+  <div id="inputs1">
+    <input class="inputEspecifico" placeholder="Tarefa: " [(ngModel)]="tarefa.nome" />
+    <input class="inputEspecifico" placeholder="Descrição: " [(ngModel)]="tarefa.descricao" />
+
     <select class="inputEspecifico" [(ngModel)]="tarefa.categoria">
       <option value="To do">To do</option>
       <option value="Doing">Doing</option>
       <option value="Done">Done</option>
     </select>
-  
+
     <button class="inputEspecifico" (click)="cadastrarUsuario()">Cadastrar</button>
-    
-      
+
+
   </div>
-  
-  
-  <div style="display: flex;flex-wrap: wrap; width: 100%;
-  justify-content: space-around;">
-    <div id="inputs2" *ngFor="let tarefa2 of tarefas;index as indice;">
-       
-        <h4 class="mostrar2">
-          Tarefa: {{ tarefa2.nome }}<br><br>
-          Descrição: {{tarefa2.descricao}}<br><br>
-          Status Atual: {{tarefa2.categoria}}
-        </h4>
-      
-      
-    
-      <select class="mostrar2" name="" id="" [(ngModel)]="tarefa2.categoria" (change)="mudar()">
-        <option value="To do">To do</option>
-        <option value="Doing">Doing</option>
-        <option value="Done">Done</option>
-      </select>
-    
-      <button class="mostrar2" (click)="removerTarefa(indice)">Apagar 🗑️</button>
+
+  <div class="preFixo">
+
+    <div>
+      <div style="display: block;">
+        <h2>To do</h2>
+        <div id="todo" *ngFor="let tarefa2 of tarefas; index as indice;">
+          <div *ngIf="tarefa2.categoria === 'To do'">
+            <h4 class="mostrar2">
+              Tarefa: {{ tarefa2.nome }}<br><br>
+              Descrição: {{tarefa2.descricao}}<br><br>
+              Status Atual: {{tarefa2.categoria}}
+            </h4>
+
+
+
+            <select class="mostrar2" name="" id="" [(ngModel)]="tarefa2.categoria" (change)="LocalStorage()">
+              <option value="To do">To do</option>
+              <option value="Doing">Doing</option>
+              <option value="Done">Done</option>
+            </select>
+
+            <button class="mostrar2" (click)="removerTarefa(indice)">Apagar 🗑️</button>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  
-  
-  
+
+
+    <div>
+      <div style="display: block;">
+        <h2>Doing</h2>
+        <div id="todo" *ngFor="let tarefa2 of tarefas; index as indice;">
+          <div *ngIf="tarefa2.categoria === 'Doing'">
+            <h4 class="mostrar2">
+              Tarefa: {{ tarefa2.nome }}<br><br>
+              Descrição: {{tarefa2.descricao}}<br><br>
+              Status Atual: {{tarefa2.categoria}}
+            </h4>
+
+
+
+            <select class="mostrar2" name="" id="" [(ngModel)]="tarefa2.categoria" (change)="LocalStorage()">
+              <option value="To do">To do</option>
+              <option value="Doing">Doing</option>
+              <option value="Done">Done</option>
+            </select>
+
+            <button class="mostrar2" (click)="removerTarefa(indice)">Apagar 🗑️</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div>
+      <div style="display: block;">
+        <h2>Done</h2>
+        <div id="todo" *ngFor="let tarefa2 of tarefas; index as indice;">
+          <div *ngIf="tarefa2.categoria === 'Done'">
+            <h4 class="mostrar2">
+              Tarefa: {{ tarefa2.nome }}<br><br>
+              Descrição: {{tarefa2.descricao}}<br><br>
+              Status Atual: {{tarefa2.categoria}}
+            </h4>
+
+
+
+            <select class="mostrar2" name="" id="" [(ngModel)]="tarefa2.categoria" (change)="LocalStorage()">
+              <option value="To do">To do</option>
+              <option value="Doing">Doing</option>
+              <option value="Done">Done</option>
+            </select>
+
+            <button class="mostrar2" (click)="removerTarefa(indice)">Apagar 🗑️</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+   </div>
+
+
+
+
 </body>
-
-  
-
