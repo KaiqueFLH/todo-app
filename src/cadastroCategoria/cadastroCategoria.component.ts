@@ -8,15 +8,15 @@ import { Component } from "@angular/core";
 
 export class CadastroCategoriaComponent{
   ngOnInit():void{
-    if(this.listaCategorias!=null){
+    if(localStorage.getItem('listaCategorias')!=null){
       this.listaCategorias = JSON.parse(localStorage.getItem('listaCategorias'));
     }
     
   }
 
-  nomeCategoria:String='';
+  nomeCategoria:String;
   listaCategorias:String[]= [];
-
+  
 
 
   cadastrarCategoria():void{

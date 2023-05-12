@@ -8,3 +8,18 @@ body{
     justify-content: center;
     color: white;
 }
+.divMaior{
+    display: flex;
+    justify-content: space-between;
+    color: white;
+}
+
+.h1{
+    color: white;
+    display: flex;
+    
+}
+
+.p{
+    color: white;
+}

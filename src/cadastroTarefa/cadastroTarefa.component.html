@@ -1,17 +1,55 @@
-<h1 class="h1Cadastro">Cadastro de Tarefas</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<hr>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
 
-<input type="text" placeholder="Tarefa" ngModel="tarefaNome">
+<body>
 
-<select name="" id="">
-  <option value="">
-    {{tarefaNome}}
-  </option>
-</select>
+  <h1 class="h1Cadastro">Cadastro de Tarefas</h1>
 
-<div style="display: flex; justify-content:space-between;">
-  <div ngFor="let categoria of listaCategorias">
-    {{categoria}}
+  <hr>
+
+
+  <input type="text" placeholder="Tarefa:" [(ngModel)]="tarefa.tarefaNome">
+  <input type="text" placeholder="Descrição:" [(ngModel)]="tarefa.descricao">
+  <select [(ngModel)]="tarefa.categoria">
+    <option *ngFor="let categoria of listaCategorias" [value]="categoria">
+      {{categoria}}
+    </option>
+  </select>
+  <button (click)="cadastrarTarefa()">Cadastrar Tarefa</button>
+
+
+
+  <div class="divMaior">
+    <div *ngFor="let categoria of listaCategorias">
+
+      <h1>{{categoria}}</h1>
+
+      <div style="display:flex;justify-content: space-between;width: 100%;">
+        <div *ngFor="let tarefa of tarefas, index as indice">
+          <div *ngIf="tarefa.categoria==categoria">
+            <p class="p">Nome da Tarefa: {{tarefa.tarefaNome}}</p>
+            <p class="p">Descrição: {{tarefa.descricao}}</p>
+            <p class="p">Status: {{tarefa.categoria}}</p>
+
+            <select (change)="LocalStorage()" [(ngModel)]="tarefa.categoria">
+              <option *ngFor="let categoria of listaCategorias" [value]="categoria">
+                {{categoria}}
+              </option>
+            </select>
+
+            <button (click)="removerTarefa(indice)">🗑️</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</body>
+
+</html>

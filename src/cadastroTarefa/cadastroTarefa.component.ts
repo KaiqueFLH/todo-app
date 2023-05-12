@@ -2,10 +2,9 @@ import { Component } from '@angular/core';
 import { stringify } from 'querystring';
 
 interface Tarefas{
-  nome:String;
-  categoria:String;
+  tarefaNome:String;
   descricao:String;
-  id:number;
+  categoria:String;
 }
 
 @Component({
@@ -19,39 +18,37 @@ export class CadastroTarefaComponent {
     if (localStorage.getItem('Lista de Tarefas') != null) {
       this.tarefas = JSON.parse(localStorage.getItem('Lista de Tarefas'));
     }
+    if (localStorage.getItem('listaCategorias') != null) {
+      this.listaCategorias = JSON.parse(localStorage.getItem('listaCategorias'));
+    }
     
   }
 
   tarefas:Tarefas[] = [];
-
-  tarefaNome:String="";
-  categoriaSelecionada:String="";
   listaCategorias:String[]=[];
-
- 
+  tarefaNome:String;
+  categoria:String;
+  descricao:String;
   
 
   tarefa:Tarefas={
-    nome:null,
-    categoria:null,
-    descricao:null,
-    id:0
+    tarefaNome:"",
+    descricao:"",
+    categoria:""
   }
 
   cadastrarTarefa():void{
-    if(this.tarefa.nome!=null){
       const usuario:Tarefas={
-        nome: this.tarefa.nome,
-        categoria: this.tarefa.categoria,
-        descricao:this.tarefa.descricao,
-        id: this.tarefa.id++
+        tarefaNome:this.tarefa.tarefaNome,
+        categoria:this.tarefa.categoria,
+        descricao:this.tarefa.descricao
       }
       this.tarefas.push(usuario);
       this.LocalStorage()
-    }
-      this.tarefa.nome=null;
-      this.tarefa.descricao=null;
-      this.tarefa.categoria=null;
+    
+      this.tarefa.tarefaNome="";
+      this.tarefa.descricao="";
+      this.tarefa.categoria="";
   }
 
 
@@ -64,4 +61,6 @@ export class CadastroTarefaComponent {
     localStorage.setItem("Lista de Tarefas",JSON.stringify(this.tarefas))
 
   }
+
+  
 }
