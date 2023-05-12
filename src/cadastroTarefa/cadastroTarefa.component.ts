@@ -38,6 +38,8 @@ export class CadastroTarefaComponent {
   }
 
   cadastrarTarefa():void{
+
+    if(this.tarefaNome!="" && this.categoria!=""){
       const usuario:Tarefas={
         tarefaNome:this.tarefa.tarefaNome,
         categoria:this.tarefa.categoria,
@@ -45,6 +47,8 @@ export class CadastroTarefaComponent {
       }
       this.tarefas.push(usuario);
       this.LocalStorage()
+    }
+      
     
       this.tarefa.tarefaNome="";
       this.tarefa.descricao="";
@@ -59,7 +63,6 @@ export class CadastroTarefaComponent {
 
   LocalStorage(){
     localStorage.setItem("Lista de Tarefas",JSON.stringify(this.tarefas))
-
   }
 
   

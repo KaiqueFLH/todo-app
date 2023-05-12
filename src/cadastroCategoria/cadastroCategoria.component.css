@@ -1,14 +1,26 @@
-body{
+body {
     margin: 0;
-    
+
 }
 
-.h1Cadastro{
+.h1Cadastro {
     display: flex;
     justify-content: center;
     color: white;
 }
 
-.p{
+.p {
     color: white;
+    font-size: 25px;
+    padding: 10px;
+
+}
+
+.b {
+    margin-top: 50px;
+}
+
+.divInputs {
+    display: flex;
+    justify-content: center;
 }

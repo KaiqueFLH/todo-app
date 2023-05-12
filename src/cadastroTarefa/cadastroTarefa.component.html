@@ -14,26 +14,27 @@
 
   <hr>
 
-
-  <input type="text" placeholder="Tarefa:" [(ngModel)]="tarefa.tarefaNome">
-  <input type="text" placeholder="Descrição:" [(ngModel)]="tarefa.descricao">
-  <select [(ngModel)]="tarefa.categoria">
-    <option *ngFor="let categoria of listaCategorias" [value]="categoria">
-      {{categoria}}
-    </option>
-  </select>
-  <button (click)="cadastrarTarefa()">Cadastrar Tarefa</button>
-
-
+  <div class="divInputs">
+    <input type="text" placeholder="Tarefa:" [(ngModel)]="tarefa.tarefaNome">
+    <input type="text" placeholder="Descrição:" [(ngModel)]="tarefa.descricao">
+    <select [(ngModel)]="tarefa.categoria">
+      <option *ngFor="let categoria of listaCategorias" [value]="categoria">
+        {{categoria}}
+      </option>
+    </select>
+    <button (click)="cadastrarTarefa()">Cadastrar Tarefa</button>
+  </div>
 
   <div class="divMaior">
     <div *ngFor="let categoria of listaCategorias">
 
       <h1>{{categoria}}</h1>
 
-      <div style="display:flex;justify-content: space-between;width: 100%;">
+
+      <div class="divResultado">
         <div *ngFor="let tarefa of tarefas, index as indice">
           <div *ngIf="tarefa.categoria==categoria">
+            <hr>
             <p class="p">Nome da Tarefa: {{tarefa.tarefaNome}}</p>
             <p class="p">Descrição: {{tarefa.descricao}}</p>
             <p class="p">Status: {{tarefa.categoria}}</p>
