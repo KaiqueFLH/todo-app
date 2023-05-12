@@ -1,0 +1,17 @@
+<h1 class="h1Cadastro">Cadastro de Tarefas</h1>
+
+<hr>
+
+<input type="text" placeholder="Tarefa" ngModel="tarefaNome">
+
+<select name="" id="">
+  <option value="">
+    {{tarefaNome}}
+  </option>
+</select>
+
+<div style="display: flex; justify-content:space-between;">
+  <div ngFor="let categoria of listaCategorias">
+    {{categoria}}
+  </div>
+</div>

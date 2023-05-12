@@ -1,0 +1,14 @@
+body{
+    margin: 0;
+    
+}
+
+.h1Cadastro{
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+.p{
+    color: white;
+}

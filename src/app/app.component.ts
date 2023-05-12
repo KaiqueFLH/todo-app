@@ -1,12 +1,4 @@
-import { Component } from '@angular/core';
-import { stringify } from 'querystring';
-
-interface Tarefas{
-  nome:String;
-  categoria:String;
-  descricao:String;
-  id:number;
-}
+import { Component } from "@angular/core";
 
 @Component({
   selector: 'app-root',
@@ -14,49 +6,6 @@ interface Tarefas{
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
-  ngOnInit(): void {
-    if (localStorage.getItem('Lista de Tarefas') != null) {
-      this.tarefas = JSON.parse(localStorage.getItem('Lista de Tarefas'));
-    }
-    
-  }
+export class AppComponent{
 
-  tarefas:Tarefas[] = [];
- 
-  
-
-  tarefa:Tarefas={
-    nome:null,
-    categoria:null,
-    descricao:null,
-    id:0
-  }
-
-  cadastrarUsuario():void{
-    if(this.tarefa.nome!=null && this.tarefa.categoria!=null ){
-      const usuario:Tarefas={
-        nome: this.tarefa.nome,
-        categoria: this.tarefa.categoria,
-        descricao:this.tarefa.descricao,
-        id: this.tarefa.id++
-      }
-      this.tarefas.push(usuario);
-      this.LocalStorage()
-    }
-      this.tarefa.nome=null;
-      this.tarefa.descricao=null;
-      this.tarefa.categoria=null;
-  }
-
-
-  removerTarefa(indice):void{
-    this.tarefas.splice(indice,1)
-    this.LocalStorage()
-  }
-
-  LocalStorage(){
-    localStorage.setItem("Lista de Tarefas",JSON.stringify(this.tarefas))
-
-  }
 }
