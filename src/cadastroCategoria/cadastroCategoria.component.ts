@@ -13,22 +13,40 @@ export class CadastroCategoriaComponent {
     }
 
   }
-
-  nomeCategoria: String="";
+  categoriaExistente: String;
+  nomeCategoria: String = "";
   listaCategorias: String[] = [];
 
+
+  testeIgualdade(): String {
+    for (let i = 0; i < this.listaCategorias.length; i++) {
+      if (this.nomeCategoria == this.listaCategorias[i]) {
+        this.categoriaExistente = this.listaCategorias[i]
+      }
+    }
+    return this.categoriaExistente
+
+  }
 
 
   cadastrarCategoria(): void {
     console.log(this.nomeCategoria);
 
-    if(this.nomeCategoria!=""){
-      this.listaCategorias.push(this.nomeCategoria);
-      localStorage.setItem('listaCategorias', JSON.stringify(this.listaCategorias));
+    if (this.nomeCategoria != "") {
+      if (this.nomeCategoria != this.testeIgualdade()) {
+        this.listaCategorias.push(this.nomeCategoria);
+        localStorage.setItem('listaCategorias', JSON.stringify(this.listaCategorias));
+      }
+      else{
+        alert("A Categoria que você está tentando cadastrar, já existe!")
+      }
     }
-    
 
-    this.nomeCategoria='';
+    else {
+      alert('*Você não Inseriu nenhuma nova categoria*');
+    }
+
+    this.nomeCategoria = '';
 
   }
 

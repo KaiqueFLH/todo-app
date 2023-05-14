@@ -26,9 +26,9 @@ export class CadastroTarefaComponent {
 
   tarefas:Tarefas[] = [];
   listaCategorias:String[]=[];
-  tarefaNome:String;
-  categoria:String;
-  descricao:String;
+  tarefaNome:String=null;
+  categoria:String=null;
+  descricao:String=null;
   
 
   tarefa:Tarefas={
@@ -39,15 +39,16 @@ export class CadastroTarefaComponent {
 
   cadastrarTarefa():void{
 
-    if(this.tarefaNome!="" && this.categoria!=""){
+    if(this.tarefa.tarefaNome!="" && this.tarefa.categoria!=""){
       const usuario:Tarefas={
         tarefaNome:this.tarefa.tarefaNome,
-        categoria:this.tarefa.categoria,
-        descricao:this.tarefa.descricao
+        descricao:this.tarefa.descricao,
+        categoria:this.tarefa.categoria
       }
       this.tarefas.push(usuario);
       this.LocalStorage()
     }
+    
       
     
       this.tarefa.tarefaNome="";
