@@ -15,20 +15,20 @@
   <hr>
 
   <div class="divInputs">
-    <input type="text" placeholder="Tarefa:" [(ngModel)]="tarefa.tarefaNome">
-    <input type="text" placeholder="Descrição:" [(ngModel)]="tarefa.descricao">
-    <select [(ngModel)]="tarefa.categoria">
+    <input class="button" type="text" placeholder="Tarefa:" [(ngModel)]="tarefa.tarefaNome">
+    <input class="button" type="text" placeholder="Descrição:" [(ngModel)]="tarefa.descricao">
+    <select class="button" [(ngModel)]="tarefa.categoria">
       <option *ngFor="let categoria of listaCategorias" [value]="categoria">
         {{categoria}}
       </option>
     </select>
-    <button (click)="cadastrarTarefa()">Cadastrar Tarefa</button>
+    <button class="button" (click)="cadastrarTarefa()">Cadastrar Tarefa</button>
   </div>
 
   <div class="divMaior">
     <div *ngFor="let categoria of listaCategorias">
 
-      <h1>{{categoria}}</h1>
+      <h1 class="categoria">{{categoria}}</h1>
 
 
       <div class="divResultado">
@@ -39,13 +39,13 @@
             <p class="p">Descrição: {{tarefa.descricao}}</p>
             <p class="p">Status: {{tarefa.categoria}}</p>
 
-            <select (change)="LocalStorage()" [(ngModel)]="tarefa.categoria">
+            <select class="button2" (change)="LocalStorage()" [(ngModel)]="tarefa.categoria">
               <option *ngFor="let categoria of listaCategorias" [value]="categoria">
                 {{categoria}}
               </option>
             </select>
 
-            <button (click)="removerTarefa(indice)">🗑️</button>
+            <button class="button2" (click)="removerTarefa(indice)">🗑️</button>
           </div>
         </div>
       </div>

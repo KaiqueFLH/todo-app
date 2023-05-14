@@ -14,15 +14,15 @@
     <hr>
 
     <div class="divInputs">
-        <input type="text" placeholder="Insira a Categoria:" [(ngModel)]="nomeCategoria">
-        <button (click)="cadastrarCategoria()">Cadastrar</button>
+        <input class="button" type="text" placeholder="Insira a Categoria:" [(ngModel)]="nomeCategoria">
+        <button class="button" (click)="cadastrarCategoria()">Cadastrar</button>
     </div>
 
 
     <div>
         <div *ngFor="let categoria of listaCategorias,index as indice">
             <span class="p">{{categoria}}</span>
-            <button class="b" (click)="removerCategoria(indice)">X</button>
+            <button class="button2" (click)="removerCategoria(indice)">X</button>
         </div>
     </div>
 </body>
