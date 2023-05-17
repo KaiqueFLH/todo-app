@@ -9,11 +9,19 @@
 </head>
 
 <body>
-    <h1 class="h1Cadastro">Cadastro de Categoria</h1>
+    <h1 class="h1Cadastro">CADASTRO DE CATEGORIAS</h1>
+    
 
     <hr>
 
-    <div class="divInputs">
+    <div>
+        <button class="botaoAparecer" *ngIf="teste" (click)="tornaTrue()">- </button>
+    </div>
+    <div>
+        <button class="botaoAparecer" *ngIf="!teste" (click)="tornaTrue()">+</button>
+    </div>
+
+    <div class="divInputs" *ngIf="teste">
         <input class="button" type="text" placeholder="Insira a Categoria:" [(ngModel)]="nomeCategoria">
         <button class="button" (click)="cadastrarCategoria()">Cadastrar</button>
     </div>
@@ -25,6 +33,7 @@
             <button class="button2" (click)="removerCategoria(indice)">X</button>
         </div>
     </div>
+
 </body>
 
 </html>

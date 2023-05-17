@@ -10,9 +10,7 @@
 
 <body>
 
-  <h1 class="h1Cadastro">Cadastro de Tarefas</h1>
-
-  <hr>
+  <h1 class="h1Cadastro">CADASTRO DE TAREFAS</h1>
 
   <div class="divInputs">
     <input class="button" type="text" placeholder="Tarefa:" [(ngModel)]="tarefa.tarefaNome">
@@ -22,7 +20,7 @@
         {{categoria}}
       </option>
     </select>
-    <button class="button" (click)="cadastrarTarefa()">Cadastrar Tarefa</button>
+    <button class="buttonCadastro" (click)="cadastrarTarefa()">Cadastrar Tarefa</button>
   </div>
 
   <div class="divMaior">
@@ -45,7 +43,7 @@
               </option>
             </select>
 
-            <button class="button2" (click)="removerTarefa(indice)">🗑️</button>
+            <button class="buttonRemover" (click)="removerTarefa(indice)">🗑️</button>
           </div>
         </div>
       </div>

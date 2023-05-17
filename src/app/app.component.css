@@ -19,18 +19,24 @@
     font-family: Batman1;
 }
 
+button { 
+    cursor: pointer;
+}
+
+
 .inputEspecifico{
     padding: 10px;
-    border: 2px solid black;
+    margin: 10px;
+    background-color: white;
     border-radius: 15px;
 }
 
 #inputs1{
     display: flex;
     justify-content: center;
-    padding-top: 20px;
-    
+    background-color: black;
 }
+
 
 
 

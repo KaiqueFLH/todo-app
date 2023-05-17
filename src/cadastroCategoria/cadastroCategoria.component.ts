@@ -16,6 +16,21 @@ export class CadastroCategoriaComponent {
   categoriaExistente: String;
   nomeCategoria: String = "";
   listaCategorias: String[] = [];
+  
+  teste = false;
+
+  tornaTrue(): void {
+    
+    if(!this.teste){
+      this.teste = true;
+
+    } else {
+      this.teste = false;
+    }
+  }
+  
+
+  
 
 
   testeIgualdade(): String {

@@ -1,17 +1,32 @@
+@font-face {
+    font-family:Batman1;
+    src: url(../app/fontes/batmfa__.ttf);
+}
+
 body{
     margin: 0;
     
+}
+button { 
+    cursor: pointer;
 }
 
 .h1Cadastro{
     display: flex;
     justify-content: center;
     color: white;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: black;
+    margin: 0;
+    padding-top: 30px;
+    padding: 20px;
+    font-size: 25px;
 }
 .divMaior{
     display: flex;
     justify-content: space-around;
-    color: white;
+    color: black;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .divInputs{
@@ -21,31 +36,65 @@ body{
 
 .divResultado{
     display:flex;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 100%;
     flex-direction: column;
     margin-top: 15px;
 }
 
 .h1{
-    color: white;
+    color: black;
     display: flex;
     
 }
 
 .p{
-    color: white;
+    color: black;
 }
 .button {
     margin: 10px;
     padding: 15px;
     border-radius: 50px;
+    border: 1px solid black;
+    font-size: medium;
+}
+
+.buttonCadastro{
+    margin: 10px;
+    padding: 15px;
+    border-radius: 50px;
+    border: 1px solid black;
+    font-size: medium;
+    background-color: white;
+    transition: 0.9s;
+}
+
+.buttonCadastro:hover{
+    background-color: black;
+    color: white;
+    transition: 0.9s;
 }
 
 .button2 {
     padding: 15px;
     border-radius: 50px;
     margin-right: 10px;
+}
+
+.buttonRemover{
+    padding: 15px;
+    border-radius: 50px;
+    transition: 0.9s;
+    background-color: white;
+    border: 1px solid black;
+    font-size: 15px;
+}
+
+.buttonRemover:hover{
+    padding: 15px;
+    border-radius: 50px;
+    background-color: black;
+    transition: 0.9s;
 }
 
 .categoria{
