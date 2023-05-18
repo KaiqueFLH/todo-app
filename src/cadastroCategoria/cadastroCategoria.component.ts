@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { forEach } from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'categoria-root',
@@ -66,7 +67,23 @@ export class CadastroCategoriaComponent {
   }
 
   removerCategoria(indice): void {
+    let listaTarefas=[]
+    if (localStorage.getItem('Lista de Tarefas') != null) {
+      listaTarefas = JSON.parse(localStorage.getItem('Lista de Tarefas'));
+    }
+
+    for(let tarefa of listaTarefas  ){
+      console.log('a');
+      if(tarefa.categoria== this.listaCategorias[indice]){
+      
+        listaTarefas.splice(listaTarefas.indexOf(tarefa),1)
+      }
+    }
+
+    localStorage.setItem('Lista de Tarefas', JSON.stringify(listaTarefas))
+
     this.listaCategorias.splice(indice, 1)
     localStorage.setItem('listaCategorias', JSON.stringify(this.listaCategorias));
+
   }
 }
