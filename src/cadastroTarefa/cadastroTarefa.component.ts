@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { style } from '@angular/animations';
+import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { stringify } from 'querystring';
 
-interface Tarefas{
-  tarefaNome:String;
-  descricao:String;
-  categoria:String;
+interface Tarefas {
+  tarefaNome: String;
+  descricao: String;
+  categoria: String;
 }
 
 @Component({
@@ -21,50 +22,61 @@ export class CadastroTarefaComponent {
     if (localStorage.getItem('listaCategorias') != null) {
       this.listaCategorias = JSON.parse(localStorage.getItem('listaCategorias'));
     }
-    
+
   }
 
-  tarefas:Tarefas[] = [];
-  listaCategorias:String[]=[];
-  tarefaNome:String=null;
-  categoria:String=null;
-  descricao:String=null;
-  
+  constructor(private renderer: Renderer2, private el: ElementRef) { }
 
-  tarefa:Tarefas={
-    tarefaNome:"",
-    descricao:"",
-    categoria:""
+
+  tarefas: Tarefas[] = [];
+  listaCategorias: String[] = [];
+  tarefaNome: String = null;
+  categoria: String = null;
+  descricao: String = null;
+
+
+  tarefa: Tarefas = {
+    tarefaNome: "",
+    descricao: "",
+    categoria: ""
   }
 
-  cadastrarTarefa():void{
+  cadastrarTarefa(): void {
 
-    if(this.tarefa.tarefaNome!="" && this.tarefa.categoria!=""){
-      const usuario:Tarefas={
-        tarefaNome:this.tarefa.tarefaNome,
-        descricao:this.tarefa.descricao,
-        categoria:this.tarefa.categoria
+    if (this.tarefa.tarefaNome != "" && this.tarefa.categoria != "") {
+      const usuario: Tarefas = {
+        tarefaNome: this.tarefa.tarefaNome,
+        descricao: this.tarefa.descricao,
+        categoria: this.tarefa.categoria
       }
       this.tarefas.push(usuario);
       this.LocalStorage()
     }
-    
-      
-    
-      this.tarefa.tarefaNome="";
-      this.tarefa.descricao="";
-      this.tarefa.categoria="";
+
+
+
+    this.tarefa.tarefaNome = "";
+    this.tarefa.descricao = "";
+    this.tarefa.categoria = "";
   }
 
 
-  removerTarefa(indice):void{
-    this.tarefas.splice(indice,1)
+  removerTarefa(indice): void {
+    this.tarefas.splice(indice, 1)
     this.LocalStorage()
   }
 
-  LocalStorage(){
-    localStorage.setItem("Lista de Tarefas",JSON.stringify(this.tarefas))
+  LocalStorage() {
+    localStorage.setItem("Lista de Tarefas", JSON.stringify(this.tarefas))
   }
 
-  
+  tamanhoTextArea(): void {
+    for (let textarea of this.el.nativeElement.querySelectorAll("textarea")) {
+      textarea.style.height = 'auto';
+      textarea.style.height = `${textarea.scrollHeight}px`;
+    }
+
+  }
+
+
 }

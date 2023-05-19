@@ -1,74 +1,87 @@
 @font-face {
-    font-family:Batman1;
+    font-family: Batman1;
     src: url(../app/fontes/batmfa__.ttf);
 }
 
-body{
+body {
     margin: 0;
-    
 }
-button { 
+
+button,
+select {
     cursor: pointer;
 }
 
-.h1Cadastro{
+.h1Cadastro {
     display: flex;
     justify-content: center;
     color: white;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     background-color: black;
     margin: 0;
     padding-top: 30px;
     padding: 20px;
     font-size: 25px;
 }
-.divMaior{
-    display: flex;
-    justify-content: space-around;
-    color: black;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
 
-.divInputs{
+.divAcimaInput {
+    width: 100%;
     display: flex;
     justify-content: center;
 }
 
-.divResultado{
-    display:flex;
+.divInputs {
+    display: flex;
+    justify-content: center;
+
+}
+
+.divMaior {
+    display: flex;
+    justify-content: space-around;
+    color: black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.divResultado {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     width: 100%;
     flex-direction: column;
     margin-top: 15px;
 }
 
-.h1{
+.h1 {
     color: black;
     display: flex;
-    
+
 }
 
-.p{
+.p {
     color: black;
 }
+
 .button {
-    margin: 10px;
+    margin-top: 10px;
+    margin-left: 4px;
     padding: 15px;
-    border-radius: 50px;
+    border-radius: 20px;
     border: 1px solid black;
 }
 
-.buttonCadastro{
-    margin: 10px;
+.buttonCadastro {
+    margin-top: 4px;
     padding: 15px;
     border-radius: 50px;
     border: 1px solid black;
     font-size: medium;
     background-color: white;
     transition: 0.9s;
+    width: 500px;
 }
 
-.buttonCadastro:hover{
+.buttonCadastro:hover {
     background-color: black;
     color: white;
     transition: 0.9s;
@@ -80,7 +93,7 @@ button {
     margin-right: 10px;
 }
 
-.buttonRemover{
+.buttonRemover {
     padding: 15px;
     border-radius: 50px;
     transition: 0.9s;
@@ -89,14 +102,44 @@ button {
     font-size: 15px;
 }
 
-.buttonRemover:hover{
+.buttonRemover:hover {
     padding: 15px;
     border-radius: 50px;
     background-color: black;
     transition: 0.9s;
 }
 
-.categoria{
+.textArea {
+    resize: none;
+    height: 100px;
+    border-radius: 10px;
+}
+
+option {
+    background-color: black;
+    color: white;
+}
+
+option:-moz-drag-over {
+    background-color: green;
+}
+
+.categoria {
     display: flex;
     justify-content: center;
+}
+
+.aa {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.bb {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    width: 30%;
+    flex-wrap: wrap;
 }

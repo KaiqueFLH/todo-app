@@ -1,17 +1,17 @@
-
 @font-face {
-    font-family:Batman1;
+    font-family: Batman1;
     src: url(./fontes/batmfa__.ttf);
 }
+
 @font-face {
-    font-family:Batman2;
+    font-family: Batman2;
     src: url(./fontes/BATMAN.ttf);
 }
 
-#h1{
+#h1 {
     margin: 0;
     height: 15vh;
-    background-color:black;
+    background-color: black;
     color: white;
     display: flex;
     justify-content: center;
@@ -19,25 +19,20 @@
     font-family: Batman1;
 }
 
-button { 
+button {
     cursor: pointer;
 }
 
 
-.inputEspecifico{
+.inputEspecifico {
     padding: 10px;
     margin: 10px;
     background-color: white;
     border-radius: 15px;
 }
 
-#inputs1{
+#inputs1 {
     display: flex;
     justify-content: center;
     background-color: black;
 }
-
-
-
-
-

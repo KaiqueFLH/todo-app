@@ -17,21 +17,21 @@ export class CadastroCategoriaComponent {
   categoriaExistente: String;
   nomeCategoria: String = "";
   listaCategorias: String[] = [];
-  
+
   teste = false;
 
   tornaTrue(): void {
-    
-    if(!this.teste){
+
+    if (!this.teste) {
       this.teste = true;
 
     } else {
       this.teste = false;
     }
   }
-  
 
-  
+
+
 
 
   testeIgualdade(): String {
@@ -53,7 +53,7 @@ export class CadastroCategoriaComponent {
         this.listaCategorias.push(this.nomeCategoria);
         localStorage.setItem('listaCategorias', JSON.stringify(this.listaCategorias));
       }
-      else{
+      else {
         alert("A Categoria que você está tentando cadastrar, já existe!")
       }
     }
@@ -67,16 +67,16 @@ export class CadastroCategoriaComponent {
   }
 
   removerCategoria(indice): void {
-    let listaTarefas=[]
+    let listaTarefas = []
     if (localStorage.getItem('Lista de Tarefas') != null) {
       listaTarefas = JSON.parse(localStorage.getItem('Lista de Tarefas'));
     }
 
-    for(let tarefa of listaTarefas  ){
+    for (let tarefa of listaTarefas) {
       console.log('a');
-      if(tarefa.categoria== this.listaCategorias[indice]){
-      
-        listaTarefas.splice(listaTarefas.indexOf(tarefa),1)
+      if (tarefa.categoria == this.listaCategorias[indice]) {
+
+        listaTarefas.splice(listaTarefas.indexOf(tarefa), 1)
       }
     }
 

@@ -12,16 +12,26 @@
 
   <h1 class="h1Cadastro">CADASTRO DE TAREFAS</h1>
 
-  <div class="divInputs">
-    <input class="button" type="text" placeholder="Tarefa:" [(ngModel)]="tarefa.tarefaNome">
-    <input class="button" type="text" placeholder="Descrição:" [(ngModel)]="tarefa.descricao">
-    <select class="button" [(ngModel)]="tarefa.categoria">
-      <option *ngFor="let categoria of listaCategorias" [value]="categoria">
-        {{categoria}}
-      </option>
-    </select>
-    <button class="buttonCadastro" (click)="cadastrarTarefa()">Cadastrar Tarefa</button>
+  <div>
+    <div class="divAcimaInput">
+      <div class="divInputs">
+        <input class="button" type="text" placeholder="Tarefa:" [(ngModel)]="tarefa.tarefaNome">
+        <input class="button" type="text" placeholder="Descrição:" [(ngModel)]="tarefa.descricao">
+        <select class="button" [(ngModel)]="tarefa.categoria">
+          <option *ngFor="let categoria of listaCategorias" [value]="categoria">
+            {{categoria}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div style="display: flex; justify-content:center">
+      <div>
+        <button class="buttonCadastro" (click)="cadastrarTarefa()">Cadastrar Tarefa</button>
+      </div>
+    </div>
   </div>
+
+
 
   <div class="divMaior">
     <div *ngFor="let categoria of listaCategorias">
@@ -34,7 +44,9 @@
           <div *ngIf="tarefa.categoria==categoria">
             <hr>
             <p class="p">Nome da Tarefa: {{tarefa.tarefaNome}}</p>
-            <p class="p">Descrição: {{tarefa.descricao}}</p>
+            <p class="p">Descrição:</p>
+            <textarea class="textArea" (input)="tamanhoTextArea(); LocalStorage()"
+              [(ngModel)]="tarefa.descricao">{{tarefa.descricao}}</textarea>
             <p class="p">Status: {{tarefa.categoria}}</p>
 
             <select class="button2" (change)="LocalStorage()" [(ngModel)]="tarefa.categoria">
@@ -49,6 +61,7 @@
       </div>
     </div>
   </div>
+  <br><br>
 </body>
 
 </html>
