@@ -25,11 +25,21 @@ button {
 
 
 .inputEspecifico {
-    padding: 10px;
+    padding: 12px;
     margin: 10px;
-    background-color: white;
+    color: white;
+    background-color: black;
     border-radius: 15px;
+    border: 1px solid white;
+    transition: 0.3s;
 }
+
+.inputEspecifico:hover {
+    background-color: white;
+    color: black;
+    transition: 0.3s;
+}
+
 
 #inputs1 {
     display: flex;

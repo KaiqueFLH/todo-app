@@ -33,6 +33,8 @@ export class CadastroTarefaComponent {
   tarefaNome: String = null;
   categoria: String = null;
   descricao: String = null;
+  tarefaDrop: Tarefas;
+  categoriaDrop:String;
 
 
   tarefa: Tarefas = {
@@ -77,6 +79,23 @@ export class CadastroTarefaComponent {
     }
 
   }
+
+  allowDrop(categoriaD):void{
+    console.log("a")
+    this.tarefaDrop.categoria = categoriaD;
+    this.LocalStorage();
+  }
+
+  drop(tarefaD):void{
+    
+    this.tarefaDrop = tarefaD
+    console.log(this.tarefaDrop)
+  }
+
+  
+
+
+  
 
 
 }

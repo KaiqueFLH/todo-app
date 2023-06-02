@@ -22,15 +22,18 @@
     </div>
 
     <div class="divInputs" *ngIf="teste">
-        <input class="button" type="text" placeholder="Insira a Categoria:" [(ngModel)]="nomeCategoria">
+        <input class="button" type="text" maxlength="24" placeholder="Insira a Categoria:" [(ngModel)]="nomeCategoria">
         <button class="buttonCadastro" (click)="cadastrarCategoria()">Cadastrar</button>
     </div>
 
 
     <div class="divResultado">
         <div class="aa" *ngFor="let categoria of listaCategorias,index as indice">
-            <span class="p">{{categoria}}</span>
-            <button class="button2" (click)="removerCategoria(indice);">X</button>
+            <div draggable="true">
+                <span class="p">{{categoria}}</span>
+                <button class="button2" (click)="removerCategoria(indice);">X</button>
+            </div>
+            
         </div>
     </div>
 

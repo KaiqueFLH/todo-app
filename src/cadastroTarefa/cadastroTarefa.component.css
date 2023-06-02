@@ -41,6 +41,7 @@ select {
     justify-content: space-around;
     color: black;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 100%;
 }
 
 .divResultado {
@@ -66,7 +67,7 @@ select {
     margin-top: 10px;
     margin-left: 4px;
     padding: 15px;
-    border-radius: 20px;
+    border-radius: 10px;
     border: 1px solid black;
 }
 
@@ -115,15 +116,6 @@ select {
     border-radius: 10px;
 }
 
-option {
-    background-color: black;
-    color: white;
-}
-
-option:-moz-drag-over {
-    background-color: green;
-}
-
 .categoria {
     display: flex;
     justify-content: center;
@@ -142,4 +134,11 @@ option:-moz-drag-over {
     justify-content: center;
     width: 30%;
     flex-wrap: wrap;
+}
+
+.categoria-coluna {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 30%;
 }

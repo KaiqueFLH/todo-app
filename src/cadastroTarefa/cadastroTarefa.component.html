@@ -15,7 +15,7 @@
   <div>
     <div class="divAcimaInput">
       <div class="divInputs">
-        <input class="button" type="text" placeholder="Tarefa:" [(ngModel)]="tarefa.tarefaNome">
+        <input class="button" type="text" placeholder="Tarefa:" maxlength="24" [(ngModel)]="tarefa.tarefaNome">
         <input class="button" type="text" placeholder="Descrição:" [(ngModel)]="tarefa.descricao">
         <select class="button" [(ngModel)]="tarefa.categoria">
           <option *ngFor="let categoria of listaCategorias" [value]="categoria">
@@ -34,16 +34,16 @@
 
 
   <div class="divMaior">
-    <div *ngFor="let categoria of listaCategorias">
+    <div (dragover)="allowDrop(categoria)" *ngFor="let categoria of listaCategorias" class="categoria-coluna">
 
       <h1 class="categoria">{{categoria}}</h1>
 
 
       <div class="divResultado">
-        <div *ngFor="let tarefa of tarefas, index as indice">
+        <div draggable="true" (dragstart)="drop(tarefa)" *ngFor="let tarefa of tarefas, index as indice">
           <div *ngIf="tarefa.categoria==categoria">
             <hr>
-            <p class="p">Nome da Tarefa: {{tarefa.tarefaNome}}</p>
+            <p class="p">Nome: {{tarefa.tarefaNome}}</p>
             <p class="p">Descrição:</p>
             <textarea class="textArea" (input)="tamanhoTextArea(); LocalStorage()"
               [(ngModel)]="tarefa.descricao">{{tarefa.descricao}}</textarea>
