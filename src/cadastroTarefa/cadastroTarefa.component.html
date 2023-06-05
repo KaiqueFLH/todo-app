@@ -34,13 +34,15 @@
 
 
   <div class="divMaior">
-    <div (dragover)="allowDrop(categoria)" *ngFor="let categoria of listaCategorias" class="categoria-coluna">
+    <div (dragover)="dragover(categoria,indice, $event)"
+    (drop)="drop(categoria,indice, $event)"
+    *ngFor="let categoria of listaCategorias,index as indice" class="categoria-coluna">
 
       <h1 class="categoria">{{categoria}}</h1>
 
 
       <div class="divResultado">
-        <div draggable="true" (dragstart)="drop(tarefa)" *ngFor="let tarefa of tarefas, index as indice">
+        <div draggable="true" *ngFor="let tarefa of tarefas, index as indice" (dragstart)="drag(tarefa)" (drop)="pegaIndice(indice,$event)">
           <div *ngIf="tarefa.categoria==categoria">
             <hr>
             <p class="p">Nome: {{tarefa.tarefaNome}}</p>

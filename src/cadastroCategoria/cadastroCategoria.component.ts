@@ -71,12 +71,12 @@ export class CadastroCategoriaComponent {
     if (localStorage.getItem('Lista de Tarefas') != null) {
       listaTarefas = JSON.parse(localStorage.getItem('Lista de Tarefas'));
     }
-
+    
     for (let tarefa of listaTarefas) {
       console.log('a');
       if (tarefa.categoria == this.listaCategorias[indice]) {
 
-        listaTarefas.splice(listaTarefas.indexOf(tarefa), 1)
+        listaTarefas.splice(listaTarefas.indexOf(tarefa), listaTarefas.length)
       }
     }
 

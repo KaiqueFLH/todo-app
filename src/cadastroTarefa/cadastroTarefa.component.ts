@@ -1,11 +1,13 @@
 import { style } from '@angular/animations';
 import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { E } from '@angular/core/src/render3';
 import { stringify } from 'querystring';
 
 interface Tarefas {
   tarefaNome: String;
   descricao: String;
   categoria: String;
+  indicenovo:number
 }
 
 @Component({
@@ -35,12 +37,14 @@ export class CadastroTarefaComponent {
   descricao: String = null;
   tarefaDrop: Tarefas;
   categoriaDrop:String;
-
+  indiceNovo:number
+  
 
   tarefa: Tarefas = {
     tarefaNome: "",
     descricao: "",
-    categoria: ""
+    categoria: "",
+    indicenovo:0
   }
 
   cadastrarTarefa(): void {
@@ -49,7 +53,8 @@ export class CadastroTarefaComponent {
       const usuario: Tarefas = {
         tarefaNome: this.tarefa.tarefaNome,
         descricao: this.tarefa.descricao,
-        categoria: this.tarefa.categoria
+        categoria: this.tarefa.categoria,
+        indicenovo:this.tarefa.indicenovo
       }
       this.tarefas.push(usuario);
       this.LocalStorage()
@@ -80,22 +85,43 @@ export class CadastroTarefaComponent {
 
   }
 
-  allowDrop(categoriaD):void{
-    console.log("a")
-    this.tarefaDrop.categoria = categoriaD;
-    this.LocalStorage();
+  dragover(categoriaD,indice, event):void{
+    event.preventDefault();
+    // console.log("a")
+
+    this.categoriaDrop = categoriaD;    
+      
+    
+    
+    
   }
 
-  drop(tarefaD):void{
-    
+  drag(tarefaD,indice,event):void{
     this.tarefaDrop = tarefaD
+    
     console.log(this.tarefaDrop)
   }
 
-  
 
+  drop(categoria,indice, event):void{
+    event.preventDefault();
+    console.log('a');
 
-  
+    this.tarefaDrop.categoria = this.categoriaDrop;
 
+    for (const i of this.tarefas) {
+      if (i === this.tarefaDrop) {
+        this.tarefas.splice(this.tarefas.indexOf(i), 1);
+      }
+    }
+    this.tarefas.splice(this.indiceNovo, 0, this.tarefaDrop);
+
+    this.LocalStorage();
+  }
+
+  pegaIndice(indice,event):void{
+    event.preventDefault();
+    this.indiceNovo=indice;
+  }
 
 }
