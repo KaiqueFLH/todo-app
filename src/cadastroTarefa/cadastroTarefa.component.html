@@ -15,11 +15,11 @@
   <div>
     <div class="divAcimaInput">
       <div class="divInputs">
-        <input class="button" type="text" placeholder="Tarefa:" maxlength="24" [(ngModel)]="tarefa.tarefaNome">
-        <input class="button" type="text" placeholder="Descrição:" [(ngModel)]="tarefa.descricao">
-        <select class="button" [(ngModel)]="tarefa.categoria">
-          <option *ngFor="let categoria of listaCategorias" [value]="categoria">
-            {{categoria}}
+        <input class="button" type="text" placeholder="Tarefa:" maxlength="24" [(ngModel)]="tarefaNome">
+        <input class="button" type="text" placeholder="Descrição:" [(ngModel)]="descricao">
+        <select class="button" [(ngModel)]="categoria">
+          <option *ngFor="let categoria of listaCategorias">
+            {{categoria.nomeCategoria}}
           </option>
         </select>
       </div>
@@ -34,31 +34,32 @@
 
 
   <div class="divMaior">
-    <div (dragover)="dragover(categoria,indice, $event)"
-    (drop)="drop(categoria,indice, $event)"
-    *ngFor="let categoria of listaCategorias,index as indice" class="categoria-coluna">
+    <div (dragover)="dragover(categoria, $event)" (drop)="drop($event)"
+      *ngFor="let categoria of listaCategorias,index as indice" class="categoria-coluna">
 
-      <h1 class="categoria">{{categoria}}</h1>
+      <div>
+        <h1 [style.backgroundColor] = "categoria.cor" class="categoria">{{categoria.nomeCategoria}}</h1>
+      </div>
 
 
-      <div class="divResultado">
-        <div draggable="true" *ngFor="let tarefa of tarefas, index as indice" (dragstart)="drag(tarefa)" (drop)="pegaIndice(indice,$event)">
-          <div *ngIf="tarefa.categoria==categoria">
-            <hr>
-            <p class="p">Nome: {{tarefa.tarefaNome}}</p>
-            <p class="p">Descrição:</p>
-            <textarea class="textArea" (input)="tamanhoTextArea(); LocalStorage()"
-              [(ngModel)]="tarefa.descricao">{{tarefa.descricao}}</textarea>
-            <p class="p">Status: {{tarefa.categoria}}</p>
 
-            <select class="button2" (change)="LocalStorage()" [(ngModel)]="tarefa.categoria">
-              <option *ngFor="let categoria of listaCategorias" [value]="categoria">
-                {{categoria}}
-              </option>
-            </select>
+      <div draggable="true" *ngFor="let tarefa of tarefas, index as indice" (dragstart)="drag(tarefa)"
+        (drop)="pegaIndice(indice,$event)">
+        <div *ngIf="tarefa.categoria==categoria.nomeCategoria">
+          <hr>
+          <p class="p">Nome: {{tarefa.tarefaNome}}</p>
+          <p class="p">Descrição:</p>
+          <textarea class="textArea" (input)="tamanhoTextArea(); LocalStorage()"
+            [(ngModel)]="tarefa.descricao">{{tarefa.descricao}}</textarea>
+          <p class="p">Status: {{tarefa.categoria}}</p>
 
-            <button class="buttonRemover" (click)="removerTarefa(indice)">🗑️</button>
-          </div>
+          <select class="button2" (change)="alterarCategoria(tarefa)" [(ngModel)]="categoria2">
+            <option *ngFor="let categoria of listaCategorias">
+              {{categoria.nomeCategoria}}
+            </option>
+          </select>
+
+          <button class="buttonRemover" (click)="removerTarefa(indice)">🗑️</button>
         </div>
       </div>
     </div>

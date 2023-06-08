@@ -9,6 +9,10 @@ interface Tarefas {
   categoria: String;
   indicenovo:number
 }
+interface Categoria{
+  nomeCategoria:String,
+  cor:String;
+}
 
 @Component({
   selector: 'tarefa-root',
@@ -31,9 +35,10 @@ export class CadastroTarefaComponent {
 
 
   tarefas: Tarefas[] = [];
-  listaCategorias: String[] = [];
+  listaCategorias: Categoria[] = [];
   tarefaNome: String = null;
   categoria: String = null;
+  categoria2:String = null;
   descricao: String = null;
   tarefaDrop: Tarefas;
   categoriaDrop:String;
@@ -49,22 +54,24 @@ export class CadastroTarefaComponent {
 
   cadastrarTarefa(): void {
 
-    if (this.tarefa.tarefaNome != "" && this.tarefa.categoria != "") {
-      const usuario: Tarefas = {
-        tarefaNome: this.tarefa.tarefaNome,
-        descricao: this.tarefa.descricao,
-        categoria: this.tarefa.categoria,
-        indicenovo:this.tarefa.indicenovo
-      }
-      this.tarefas.push(usuario);
-      this.LocalStorage()
+    const tarefaAdd: Tarefas = {
+      tarefaNome: this.tarefaNome,
+      categoria: this.categoria,
+      descricao: this.descricao,
+      indicenovo:this.indiceNovo
     }
+    console.log(tarefaAdd)
 
+    if (this.verificaIgualdade()) {
+      if (tarefaAdd.tarefaNome != '' && tarefaAdd.categoria != '') {
+        this.tarefas.push(tarefaAdd);
+        this.LocalStorage();
 
-
-    this.tarefa.tarefaNome = "";
-    this.tarefa.descricao = "";
-    this.tarefa.categoria = "";
+      }
+    } else {
+      alert('Tarefa já cadastrada!')
+    }
+    this.limparInput();
   }
 
 
@@ -73,8 +80,31 @@ export class CadastroTarefaComponent {
     this.LocalStorage()
   }
 
+  verificaIgualdade(): boolean {
+    for (const i of this.tarefas) {
+      if (i.tarefaNome === this.tarefaNome) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   LocalStorage() {
     localStorage.setItem("Lista de Tarefas", JSON.stringify(this.tarefas))
+  }
+
+  alterarCategoria(tarefa): void {
+    tarefa.categoria = this.categoria2;
+    tarefa.showCategoria = false;
+    this.LocalStorage();
+    this.limparInput();
+  }
+
+  limparInput(): void {
+    this.tarefaNome = '';
+    this.descricao=''
+    this.categoria = '';
+    this.categoria2 = '';
   }
 
   tamanhoTextArea(): void {
@@ -85,30 +115,28 @@ export class CadastroTarefaComponent {
 
   }
 
-  dragover(categoriaD,indice, event):void{
+  dragover(categoriaD:Categoria, event:Event):void{
     event.preventDefault();
     // console.log("a")
-
-    this.categoriaDrop = categoriaD;    
-      
-    
-    
-    
+    this.categoriaDrop = categoriaD.nomeCategoria;    
   }
 
-  drag(tarefaD,indice,event):void{
+  drag(tarefaD:Tarefas):void{
     this.tarefaDrop = tarefaD
     
     console.log(this.tarefaDrop)
   }
 
 
-  drop(categoria,indice, event):void{
+  drop(event:Event):void{
     event.preventDefault();
-    console.log('a');
 
     this.tarefaDrop.categoria = this.categoriaDrop;
 
+    this.ajustarPosicao();
+  }
+
+  ajustarPosicao():void{
     for (const i of this.tarefas) {
       if (i === this.tarefaDrop) {
         this.tarefas.splice(this.tarefas.indexOf(i), 1);
@@ -119,7 +147,7 @@ export class CadastroTarefaComponent {
     this.LocalStorage();
   }
 
-  pegaIndice(indice,event):void{
+  pegaIndice(indice:number,event:Event):void{
     event.preventDefault();
     this.indiceNovo=indice;
   }

@@ -1,5 +1,10 @@
 import { Component } from "@angular/core";
-import { forEach } from "@angular/router/src/utils/collection";
+import { splitNamespace } from "@angular/core/src/view/util";
+
+interface Categoria{
+  nomeCategoria:String;
+  cor:String;
+}
 
 @Component({
   selector: 'categoria-root',
@@ -8,15 +13,19 @@ import { forEach } from "@angular/router/src/utils/collection";
 })
 
 export class CadastroCategoriaComponent {
+  
   ngOnInit(): void {
     if (localStorage.getItem('listaCategorias') != null) {
       this.listaCategorias = JSON.parse(localStorage.getItem('listaCategorias'));
     }
 
   }
-  categoriaExistente: String;
-  nomeCategoria: String = "";
-  listaCategorias: String[] = [];
+  categoriaExistente:Categoria;
+  nomeCategoria:String="";
+  cor:String="#ffffff";
+  listaCategorias: Categoria[] = [];
+  
+  
 
   teste = false;
 
@@ -32,34 +41,36 @@ export class CadastroCategoriaComponent {
 
 
 
+  verificarIgualdade(): boolean {
 
-
-  testeIgualdade(): String {
-    for (let i = 0; i < this.listaCategorias.length; i++) {
-      if (this.nomeCategoria == this.listaCategorias[i]) {
-        this.categoriaExistente = this.listaCategorias[i]
+    for (const i of this.listaCategorias) {
+      if (i.nomeCategoria === this.nomeCategoria) {
+        return false;
       }
     }
-    return this.categoriaExistente
 
+    return true;
   }
 
 
   cadastrarCategoria(): void {
     console.log(this.nomeCategoria);
 
+    const categoria: Categoria = {
+      nomeCategoria: this.nomeCategoria,
+      cor: this.cor
+    }
+
     if (this.nomeCategoria != "") {
-      if (this.nomeCategoria != this.testeIgualdade()) {
-        this.listaCategorias.push(this.nomeCategoria);
+      
+      if (this.verificarIgualdade()) {
+        this.listaCategorias.push(categoria);
+        
         localStorage.setItem('listaCategorias', JSON.stringify(this.listaCategorias));
       }
       else {
         alert("A Categoria que você está tentando cadastrar, já existe!")
       }
-    }
-
-    else {
-      alert('*Você não Inseriu nenhuma nova categoria*');
     }
 
     this.nomeCategoria = '';

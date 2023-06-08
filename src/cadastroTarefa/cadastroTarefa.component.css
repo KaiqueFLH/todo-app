@@ -5,6 +5,7 @@
 
 body {
     margin: 0;
+    height: 100vh;
 }
 
 button,
@@ -41,7 +42,9 @@ select {
     justify-content: space-around;
     color: black;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    flex-wrap: wrap;
     width: 100%;
+    margin-top: 65px;
 }
 
 .divResultado {
@@ -50,13 +53,23 @@ select {
     justify-content: space-around;
     width: 100%;
     flex-direction: column;
-    margin-top: 15px;
+    
 }
 
 .h1 {
     color: black;
     display: flex;
 
+}
+
+.categoria{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    /* box-shadow: -12px 15px 14px 3px rgba(0,0,0,0.75);
+    -webkit-box-shadow: -12px 15px 14px 3px rgba(0,0,0,0.75);
+    -moz-box-shadow: -12px 15px 14px 3px rgba(0,0,0,0.75); */
 }
 
 .p {
@@ -116,11 +129,6 @@ select {
     border-radius: 10px;
 }
 
-.categoria {
-    display: flex;
-    justify-content: center;
-}
-
 .aa {
     display: flex;
     justify-content: center;
@@ -128,17 +136,19 @@ select {
     flex-wrap: wrap;
 }
 
-.bb {
-    margin-top: 35px;
-    display: flex;
-    justify-content: center;
-    width: 30%;
-    flex-wrap: wrap;
-}
+
 
 .categoria-coluna {
     display: flex;
     flex-direction: column;
     text-align: center;
     width: 30%;
+}
+
+.divideDivs {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    width: 30%;
+    flex-wrap: wrap;
 }

@@ -22,6 +22,7 @@
     </div>
 
     <div class="divInputs" *ngIf="teste">
+        <input class="buttonCor" type="color" [(ngModel)]="cor">
         <input class="button" type="text" maxlength="24" placeholder="Insira a Categoria:" [(ngModel)]="nomeCategoria">
         <button class="buttonCadastro" (click)="cadastrarCategoria()">Cadastrar</button>
     </div>
@@ -29,8 +30,8 @@
 
     <div class="divResultado">
         <div class="aa" *ngFor="let categoria of listaCategorias,index as indice">
-            <div draggable="true">
-                <span class="p">{{categoria}}</span>
+            <div style="display: flex;">
+                <p [style.backgroundColor]="categoria.cor" class="p">{{categoria.nomeCategoria}}</p>
                 <button class="button2" (click)="removerCategoria(indice);">X</button>
             </div>
             
