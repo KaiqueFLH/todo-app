@@ -66,10 +66,12 @@ select {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid black;
-    /* box-shadow: -12px 15px 14px 3px rgba(0,0,0,0.75);
-    -webkit-box-shadow: -12px 15px 14px 3px rgba(0,0,0,0.75);
-    -moz-box-shadow: -12px 15px 14px 3px rgba(0,0,0,0.75); */
+    
+    border-radius: 10px;
+    background-color: white;
+     box-shadow: -12px 15px 14px 3px rgba(0,0,0,0.3);
+    -webkit-box-shadow: -12px 15px 14px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: -12px 15px 14px 3px rgba(0,0,0,0.3);  
 }
 
 .p {

@@ -52,6 +52,14 @@ export class CadastroCategoriaComponent {
     return true;
   }
 
+  contraste(cor: string): string {
+    const r = parseInt(String(cor).substr(1, 2), 16);
+    const g = parseInt(String(cor).substr(3, 2), 16);
+    const b = parseInt(String(cor).substr(5, 2), 16);
+    const luz = 0.2126 * r + 0.7152 * g + 0.0722 * b
+    return luz > 128 ? '#000' : '#fff'
+  }
+
 
   cadastrarCategoria(): void {
     console.log(this.nomeCategoria);

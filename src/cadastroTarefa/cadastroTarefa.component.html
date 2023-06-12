@@ -38,7 +38,8 @@
       *ngFor="let categoria of listaCategorias,index as indice" class="categoria-coluna">
 
       <div>
-        <h1 [style.backgroundColor] = "categoria.cor" class="categoria">{{categoria.nomeCategoria}}</h1>
+        <h1 [style.backgroundColor]="categoria.cor" class="categoria" [style.color]="contraste(categoria.cor)">
+          {{categoria.nomeCategoria}}</h1>
       </div>
 
 

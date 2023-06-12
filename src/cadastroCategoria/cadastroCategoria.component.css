@@ -3,6 +3,13 @@ body {
 
 }
 
+.div-maior {
+    display: flex;
+    gap: 20px;
+    width: 960px;
+    flex-wrap: wrap;
+}
+
 .h1Cadastro {
     display: flex;
     justify-content: center;
@@ -59,18 +66,15 @@ button {
 }
 
 .divResultado {
+    width: 100%;
     display: flex;
     justify-content: center;
-    width: 100%;
-    flex-wrap: wrap;
 }
 
 .aa {
-    margin-top: 35px;
     display: flex;
-    justify-content: center;
-    width: 30%;
-    flex-wrap: wrap;
+    /* margin-top: 35px; */
+    width: 300px;
 }
 
 .botaoAparecer {

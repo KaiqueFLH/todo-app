@@ -29,12 +29,14 @@
 
 
     <div class="divResultado">
-        <div class="aa" *ngFor="let categoria of listaCategorias,index as indice">
-            <div style="display: flex;">
-                <p [style.backgroundColor]="categoria.cor" class="p">{{categoria.nomeCategoria}}</p>
-                <button class="button2" (click)="removerCategoria(indice);">X</button>
+        <div class="div-maior">
+            <div *ngFor="let categoria of listaCategorias,index as indice">
+                <div class="aa">
+                    <p [style.backgroundColor]="categoria.cor" [style.color]="contraste(categoria.cor)" class="p">
+                        {{categoria.nomeCategoria}}</p>
+                    <button class="button2" (click)="removerCategoria(indice);">X</button>
+                </div>
             </div>
-            
         </div>
     </div>
 

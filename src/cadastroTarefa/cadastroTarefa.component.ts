@@ -115,6 +115,14 @@ export class CadastroTarefaComponent {
 
   }
 
+  contraste(cor: string): string {
+    const r = parseInt(String(cor).substr(1, 2), 16);
+    const g = parseInt(String(cor).substr(3, 2), 16);
+    const b = parseInt(String(cor).substr(5, 2), 16);
+    const luz = 0.2126 * r + 0.7152 * g + 0.0722 * b
+    return luz > 128 ? '#000' : '#fff'
+  }
+
   dragover(categoriaD:Categoria, event:Event):void{
     event.preventDefault();
     // console.log("a")
@@ -137,11 +145,7 @@ export class CadastroTarefaComponent {
   }
 
   ajustarPosicao():void{
-    for (const i of this.tarefas) {
-      if (i === this.tarefaDrop) {
-        this.tarefas.splice(this.tarefas.indexOf(i), 1);
-      }
-    }
+    this.tarefas.splice(this.tarefas.indexOf(this.tarefaDrop), 1);
     this.tarefas.splice(this.indiceNovo, 0, this.tarefaDrop);
 
     this.LocalStorage();
