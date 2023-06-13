@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de PROPRIEDADES</title>
+    <title>Cadastro de Categorias</title>
 </head>
 
 <body>
-    <h1 class="h1Cadastro">CADASTRO DE PROPRIEDADES</h1>
+    <h1 class="h1Cadastro">CADASTRO DE CATEGORIAS</h1>
 
 
     <hr>
@@ -21,27 +21,20 @@
         <button class="botaoAparecer" *ngIf="!teste" (click)="tornaTrue()">+</button>
     </div>
 
-    <!-- div de Perguntas para o usuario -->
     <div class="divInputs" *ngIf="teste">
-        <!-- <input class="buttonCor" type="color" [(ngModel)]="cor"> -->
-        <input class="button" type="text" maxlength="24" placeholder="Insira a Propriedade:" [(ngModel)]="nome">
-        <select class="button" [(ngModel)]="tipo">
-            <option *ngFor="let tipos of listaTipos">
-                {{tipos}}
-            </option>
-        </select>
-        <input class="button" type="text" maxlength="24" placeholder="Insira Opções de Seleção:" [(ngModel)]="opcaoSelecao">
-        <button class="buttonCadastro" (click)="cadastrarPropriedade()">Cadastrar</button>
+        <input class="buttonCor" type="color" [(ngModel)]="cor">
+        <input class="button" type="text" maxlength="24" placeholder="Insira a Categoria:" [(ngModel)]="nomeCategoria">
+        <button class="buttonCadastro" (click)="cadastrarCategoria()">Cadastrar</button>
     </div>
 
 
     <div class="divResultado">
         <div class="div-maior">
-            <div *ngFor="let propriedade of listaPropriedades,index as indice">
+            <div *ngFor="let categoria of listaCategorias,index as indice">
                 <div class="aa">
-                    <p class="p">
-                        {{propriedade.nome }} | {{ propriedade.tipo }}</p>
-                    <button class="button2" (click)="removerPropriedade(indice);">X</button>
+                    <p [style.backgroundColor]="categoria.cor" [style.color]="contraste(categoria.cor)" class="p">
+                        {{categoria.nomeCategoria}}</p>
+                    <button class="button2" (click)="removerCategoria(indice);">X</button>
                 </div>
             </div>
         </div>
