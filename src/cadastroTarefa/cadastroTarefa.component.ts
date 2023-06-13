@@ -13,6 +13,10 @@ interface Categoria{
   nomeCategoria:String,
   cor:String;
 }
+interface Propriedade {
+  nome: String,
+  tipo: String | number | String[];
+}
 
 @Component({
   selector: 'tarefa-root',
@@ -30,6 +34,11 @@ export class CadastroTarefaComponent {
     }
 
   }
+
+  nome: String;
+  tipo: String | number | String[];
+  listaTipos: String[] = ["Texto", "Número", "Seleção"]
+  listaPropriedades: Propriedade[] = [];
 
   constructor(private renderer: Renderer2, private el: ElementRef) { }
 
