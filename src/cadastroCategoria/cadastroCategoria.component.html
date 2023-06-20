@@ -1,45 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Categorias</title>
+    <title>Document</title>
 </head>
-
 <body>
-    <h1 class="h1Cadastro">CADASTRO DE CATEGORIAS</h1>
-
-
-    <hr>
-
-    <div>
-        <button class="botaoAparecer" *ngIf="teste" (click)="tornaTrue()">- </button>
+    <!-- Essa div é responsável pelos Botões que o usuário será capaz de interagir. -->
+    <div id="divInputs">
+        <!-- div do Cadastro de propriedade e escolha do tipo. -->
+        <div id="divCadastroProp">
+            <input id="inputTexto" type="text" [(ngModel)]="nome">
+            <select [(ngModel)]="tipo">
+                <option *ngFor="let tipos of listaTipos">
+                    {{tipos}}
+                </option>
+            </select>
+        </div>
+        
+        <!-- botão responsável por cadastrar a nova propriedade -->
+        <button (click)="cadastrarPropriedade()" id="botaoEnviar">
+            Enviar
+        </button>
     </div>
-    <div>
-        <button class="botaoAparecer" *ngIf="!teste" (click)="tornaTrue()">+</button>
-    </div>
-
-    <div class="divInputs" *ngIf="teste">
-        <input class="buttonCor" type="color" [(ngModel)]="cor">
-        <input class="button" type="text" maxlength="24" placeholder="Insira a Categoria:" [(ngModel)]="nomeCategoria">
-        <button class="buttonCadastro" (click)="cadastrarCategoria()">Cadastrar</button>
-    </div>
 
 
-    <div class="divResultado">
-        <div class="div-maior">
-            <div *ngFor="let categoria of listaCategorias,index as indice">
-                <div class="aa">
-                    <p [style.backgroundColor]="categoria.cor" [style.color]="contraste(categoria.cor)" class="p">
-                        {{categoria.nomeCategoria}}</p>
-                    <button class="button2" (click)="removerCategoria(indice);">X</button>
+<!-- ========================================================================================================================== -->
+
+
+    <!-- div responsável por mostrar ao usuário na tela as propriedades cadastradas. -->
+    <div id="divResultado">
+        <div id="divFlex-wrap">
+            <div *ngFor="let prop of listaProps, index as indice">
+                <div class="divProp">
+                    <div>
+                        <p>{{prop.nome}} | {{prop.tipo}}</p>
+                        <button (click)="removerPropriedade(indice)">X</button>
+                    </div>
+                    
+                    <div *ngIf="prop.tipo === 'Seleção'" class="adicionarSelecao">
+                        <button id="botaoCadastrarSelecao" *ngIf="!teste" (click)="tornaTrue()">Adicionar Propriedade</button>
+                        <input id="inputTextoResult" type="text" *ngIf="teste">
+                        <button id="botaoVoltarSelecao" *ngIf="teste" (click)="tornaTrue()">X</button>
+                    </div>
                 </div>
+                
             </div>
         </div>
     </div>
 
+    
+    
 </body>
-
 </html>
