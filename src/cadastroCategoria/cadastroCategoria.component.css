@@ -46,12 +46,11 @@ select{
 
 .divProp{
     width: 330px;
-    background-color: rgb(24, 24, 145);
+    background-color: rgb(69, 69, 74);
     color: white;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     gap: 30px;
 }
@@ -59,6 +58,11 @@ select{
 .divProp div:first-child {
     display: flex;
     align-items: center;
+}
+
+ul{
+    list-style: none;
+    padding: 0;
 }
 
 .adicionarSelecao{

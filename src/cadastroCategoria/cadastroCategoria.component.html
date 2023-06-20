@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <!-- Essa div é responsável pelos Botões que o usuário será capaz de interagir. -->
     <div id="divInputs">
@@ -18,7 +20,7 @@
                 </option>
             </select>
         </div>
-        
+
         <!-- botão responsável por cadastrar a nova propriedade -->
         <button (click)="cadastrarPropriedade()" id="botaoEnviar">
             Enviar
@@ -26,7 +28,7 @@
     </div>
 
 
-<!-- ========================================================================================================================== -->
+    <!-- ========================================================================================================================== -->
 
 
     <!-- div responsável por mostrar ao usuário na tela as propriedades cadastradas. -->
@@ -34,23 +36,30 @@
         <div id="divFlex-wrap">
             <div *ngFor="let prop of listaProps, index as indice">
                 <div class="divProp">
-                    <div>
+                    <div class="propNome">
                         <p>{{prop.nome}} | {{prop.tipo}}</p>
                         <button (click)="removerPropriedade(indice)">X</button>
                     </div>
-                    
+                    <div class="propConteudo">
+                        <ul>
+                            <li *ngFor="let conteudoInsert of prop.conteudo, index as indice">
+                                {{ conteudoInsert }}
+                                <button (click)="removerConteudoInsert(conteudoInsert, prop)">x</button>
+                            </li>
+                        </ul>
+                    </div>
+
                     <div *ngIf="prop.tipo === 'Seleção'" class="adicionarSelecao">
-                        <button id="botaoCadastrarSelecao" *ngIf="!teste" (click)="tornaTrue()">Adicionar Propriedade</button>
-                        <input id="inputTextoResult" type="text" *ngIf="teste">
+                        <button id="botaoCadastrarSelecao" *ngIf="!teste" (click)="tornaTrue()">Adicionar
+                            Propriedade</button>
+                        <input id="inputTextoResult" type="text" [(ngModel)]="conteudoInsert" *ngIf="teste">
+                        <button class="enviarBotao" (click)="cadastrarConteudoInsert(prop)">Enviar</button>
                         <button id="botaoVoltarSelecao" *ngIf="teste" (click)="tornaTrue()">X</button>
                     </div>
                 </div>
-                
             </div>
         </div>
     </div>
-
-    
-    
 </body>
+
 </html>

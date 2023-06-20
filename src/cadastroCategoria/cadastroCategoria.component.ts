@@ -1,9 +1,9 @@
 import { Component } from "@angular/core";
 
-interface Propriedade{
+interface Propriedade {
   nome: String,
-  tipo:String,
-  conteudo:String[] | number | String;
+  tipo: String,
+  conteudo?: String[];
 }
 
 @Component({
@@ -13,7 +13,7 @@ interface Propriedade{
 })
 
 export class CadastroCategoriaComponent {
-  
+
   ngOnInit(): void {
     if (localStorage.getItem('listaProps') != null) {
       this.listaProps = JSON.parse(localStorage.getItem('listaProps'));
@@ -21,8 +21,9 @@ export class CadastroCategoriaComponent {
   }
 
   nome: String;
-  tipo:String;
-  conteudo:String[] | number | String;
+  tipo: String;
+  conteudo: String[];
+  conteudoInsert: String;
   listaProps: Propriedade[] = [];
   listaTipos: String[] = ["Texto", "Número", "Seleção"]
 
@@ -61,27 +62,50 @@ export class CadastroCategoriaComponent {
   }
 
 
-  cadastrarPropriedade():void{
-    const prop:Propriedade = {
-      nome:this.nome,
-      tipo:this.tipo,
-      conteudo:this.conteudo
+  cadastrarPropriedade(): void {
+    let prop: Propriedade
+
+    if (this.tipo == "Seleção") {
+      prop = {
+        nome: this.nome,
+        tipo: this.tipo,
+        conteudo: []
+      }
+
+    }
+    else {
+      prop = {
+        nome: this.nome,
+        tipo: this.tipo
+      }
+    }
+    this.listaProps.push(prop);
+    this.localStorage();
+  }
+
+  cadastrarConteudoInsert(prop: Propriedade): void {
+    console.log(prop.conteudo)
+    if (Array.isArray(prop.conteudo)) {
+      prop.conteudo.push(this.conteudoInsert);
+      this.conteudoInsert = '';
     }
 
-    this.listaProps.push(prop);
-    console.log(prop.tipo);
-    
-
-    this.localStorage();
-
-  }
-
-  removerPropriedade(indice):void{
-    this.listaProps.splice(indice,1);
     this.localStorage();
   }
 
-  localStorage():void{
+  removerPropriedade(indice): void {
+    this.listaProps.splice(indice, 1);
+    this.localStorage();
+  }
+
+  removerConteudoInsert(conteudoInsert: string, prop: Propriedade): void {
+    prop.conteudo.splice(prop.conteudo.indexOf(conteudoInsert), 1);
+    this.conteudoInsert = '';
+
+    this.localStorage();
+  }
+
+  localStorage(): void {
     return localStorage.setItem("listaProps", JSON.stringify(this.listaProps));
   }
 
@@ -103,10 +127,10 @@ export class CadastroCategoriaComponent {
   //   }
 
   //   if (this.nomeCategoria != "") {
-      
+
   //     if (this.verificarIgualdade()) {
   //       this.listaCategorias.push(categoria);
-        
+
   //       localStorage.setItem('listaCategorias', JSON.stringify(this.listaCategorias));
   //     }
   //     else {
@@ -123,7 +147,7 @@ export class CadastroCategoriaComponent {
   //   if (localStorage.getItem('Lista de Tarefas') != null) {
   //     listaTarefas = JSON.parse(localStorage.getItem('Lista de Tarefas'));
   //   }
-    
+
   //   for (let tarefa of listaTarefas) {
   //     console.log('a');
   //     if (tarefa.categoria == this.listaCategorias[indice]) {
