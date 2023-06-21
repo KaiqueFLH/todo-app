@@ -16,12 +16,16 @@
     <div class="divAcimaInput">
       <div class="divInputs">
         <input class="button" type="text" placeholder="Tarefa:" maxlength="24" [(ngModel)]="tarefaNome">
-        <input class="button" type="text" placeholder="Descrição:" [(ngModel)]="descricao">
-        <select class="button" [(ngModel)]="categoria">
-          <option *ngFor="let categoria of listaCategorias">
-            {{categoria.nomeCategoria}}
-          </option>
-        </select>
+        <button (click)="aparecer()">Selecionar Propriedade</button>
+
+        <div *ngIf="teste" class="quadradaoAzul">
+          <div *ngFor="let prop of listaProps">
+            <div class="divInputVolta">
+              <input type="checkbox" [(ngModel)]="conteudo">{{prop.nome}}
+            </div>
+            <p *ngIf="teste" (click)="aparecer()" class="pVolta">↩️</p>
+          </div>
+        </div>
       </div>
     </div>
     <div style="display: flex; justify-content:center">
@@ -34,29 +38,40 @@
 
 
   <div class="divMaior">
-    <div (dragover)="dragover(categoria, $event)" (drop)="drop($event)"
-      *ngFor="let categoria of listaCategorias,index as indice" class="categoria-coluna">
+    <div (dragover)="dragover(prop, $event)" (drop)="drop($event)" *ngFor="let prop of listaProps,index as indice"
+      class="prop-coluna">
 
       <div>
-        <h1 [style.backgroundColor]="categoria.cor" class="categoria" [style.color]="contraste(categoria.cor)">
-          {{categoria.nomeCategoria}}</h1>
+        <h1 class="categoria">
+          {{prop.nome}}</h1>
       </div>
-
-
 
       <div draggable="true" *ngFor="let tarefa of tarefas, index as indice" (dragstart)="drag(tarefa)"
         (drop)="pegaIndice(indice,$event)">
-        <div *ngIf="tarefa.categoria==categoria.nomeCategoria">
+        <div *ngIf="tarefa.prop==prop.nome">
           <hr>
           <p class="p">Nome: {{tarefa.tarefaNome}}</p>
-          <p class="p">Descrição:</p>
-          <textarea class="textArea" (input)="tamanhoTextArea(); LocalStorage()"
-            [(ngModel)]="tarefa.descricao">{{tarefa.descricao}}</textarea>
-          <p class="p">Status: {{tarefa.categoria}}</p>
 
-          <select class="button2" (change)="alterarCategoria(tarefa)" [(ngModel)]="categoria2">
-            <option *ngFor="let categoria of listaCategorias">
-              {{categoria.nomeCategoria}}
+          <div *ngFor="let prop of listaProps">
+            <div *ngIf="prop.tipo === 'Texto'">
+              <p>{{prop.nome}}</p>
+              <input type="text" [(ngModel)]="conteudo">
+            </div>
+
+            <div *ngIf="prop.tipo === 'Número'">
+              <p>{{prop.nome}}</p>
+              <input type="text" [(ngModel)]="conteudo">
+            </div>
+
+            <div *ngIf="prop.tipo === 'Seleção'">
+              <p>{{prop.nome}}</p>
+              <input type="text" [(ngModel)]="conteudo">
+            </div>
+          </div>
+
+          <select class="button2" (change)="alterarPropriedade(tarefa)" [(ngModel)]="prop2">
+            <option *ngFor="let prop of listaProps">
+              {{prop.nome}}
             </option>
           </select>
 

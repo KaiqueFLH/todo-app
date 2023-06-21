@@ -154,3 +154,30 @@ select {
     width: 30%;
     flex-wrap: wrap;
 }
+
+.quadradaoAzul{
+    width: 250px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: blue;
+    position: absolute;
+    left:1000px;
+}
+
+.divInputVolta{
+    width: 100%;
+    height: 100%;
+
+}
+
+.pVolta{
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    font-size: xx-large;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}

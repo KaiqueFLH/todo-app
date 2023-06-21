@@ -4,14 +4,15 @@ import { E } from '@angular/core/src/render3';
 import { stringify } from 'querystring';
 
 interface Tarefas {
-  tarefaNome: String;
-  descricao: String;
-  categoria: String;
+  tarefaNome: String,
+  conteudoTar:String | number,
   indicenovo:number
 }
-interface Categoria{
-  nomeCategoria:String,
-  cor:String;
+interface Propriedade{
+  nome: String,
+  tipo: String,
+  conteudo: String | number,
+  inputAdd?: boolean;
 }
 
 @Component({
@@ -25,8 +26,8 @@ export class CadastroTarefaComponent {
     if (localStorage.getItem('Lista de Tarefas') != null) {
       this.tarefas = JSON.parse(localStorage.getItem('Lista de Tarefas'));
     }
-    if (localStorage.getItem('listaCategorias') != null) {
-      this.listaCategorias = JSON.parse(localStorage.getItem('listaCategorias'));
+    if (localStorage.getItem('listaProps') != null) {
+      this.listaProps = JSON.parse(localStorage.getItem('listaProps'));
     }
 
   }
@@ -35,42 +36,61 @@ export class CadastroTarefaComponent {
 
 
   tarefas: Tarefas[] = [];
-  listaCategorias: Categoria[] = [];
+  listaProps: Propriedade[] = [];
+  valor: string | number;
   tarefaNome: String = null;
-  categoria: String = null;
-  categoria2:String = null;
+  prop: Propriedade = null;
+  prop2:String = null;
   descricao: String = null;
   tarefaDrop: Tarefas;
-  categoriaDrop:String;
+  propriedadeDrop:String;
+  conteudoTar: String | number;
   indiceNovo:number
+
+  nome: String="";
+  tipo: String = "";
+  conteudo: String | number  = null;
+  inputAdd: boolean = false;
+  conteudoInsert: String;
+  listaTipos: String[] = ["Texto", "Número", "Seleção"]
   
 
   tarefa: Tarefas = {
     tarefaNome: "",
-    descricao: "",
-    categoria: "",
+    conteudoTar: null,
     indicenovo:0
+  }
+
+  propriedade: Propriedade = {
+    nome: this.nome,
+    tipo: this.tipo,
+    conteudo:this.conteudo
+  }
+
+  teste = false;
+
+  aparecer(): void {
+
+    if (!this.teste) {
+      this.teste = true;
+
+    } else {
+      this.teste = false;
+    }
   }
 
   cadastrarTarefa(): void {
 
     const tarefaAdd: Tarefas = {
       tarefaNome: this.tarefaNome,
-      categoria: this.categoria,
-      descricao: this.descricao,
+      conteudoTar:this.conteudo,
       indicenovo:this.indiceNovo
     }
     console.log(tarefaAdd)
 
-    if (this.verificaIgualdade()) {
-      if (tarefaAdd.tarefaNome != '' && tarefaAdd.categoria != '') {
+    
         this.tarefas.push(tarefaAdd);
         this.LocalStorage();
-
-      }
-    } else {
-      alert('Tarefa já cadastrada!')
-    }
     this.limparInput();
   }
 
@@ -93,9 +113,9 @@ export class CadastroTarefaComponent {
     localStorage.setItem("Lista de Tarefas", JSON.stringify(this.tarefas))
   }
 
-  alterarCategoria(tarefa): void {
-    tarefa.categoria = this.categoria2;
-    tarefa.showCategoria = false;
+  alterarPropriedade(tarefa): void {
+    tarefa.prop = this.prop2;
+    tarefa.showProp = false;
     this.LocalStorage();
     this.limparInput();
   }
@@ -103,8 +123,8 @@ export class CadastroTarefaComponent {
   limparInput(): void {
     this.tarefaNome = '';
     this.descricao=''
-    this.categoria = '';
-    this.categoria2 = '';
+    this.prop = null;
+    this.prop2 = '';
   }
 
   tamanhoTextArea(): void {
@@ -123,10 +143,10 @@ export class CadastroTarefaComponent {
     return luz > 128 ? '#000' : '#fff'
   }
 
-  dragover(categoriaD:Categoria, event:Event):void{
+  dragover(propD:Propriedade, event:Event):void{
     event.preventDefault();
     // console.log("a")
-    this.categoriaDrop = categoriaD.nomeCategoria;    
+    this.propriedadeDrop = propD.nome;    
   }
 
   drag(tarefaD:Tarefas):void{
@@ -139,7 +159,7 @@ export class CadastroTarefaComponent {
   drop(event:Event):void{
     event.preventDefault();
 
-    this.tarefaDrop.categoria = this.categoriaDrop;
+    this.tarefaDrop.tarefaNome = this.propriedadeDrop;
 
     this.ajustarPosicao();
   }

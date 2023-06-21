@@ -3,7 +3,8 @@ import { Component } from "@angular/core";
 interface Propriedade {
   nome: String,
   tipo: String,
-  conteudo?: String[];
+  conteudo?: String[],
+  inputAdd?: boolean;
 }
 
 @Component({
@@ -20,38 +21,46 @@ export class CadastroCategoriaComponent {
     }
   }
 
-  nome: String;
+  nome: String="";
   tipo: String;
   conteudo: String[];
+  inputAdd: boolean = false;
   conteudoInsert: String;
   listaProps: Propriedade[] = [];
   listaTipos: String[] = ["Texto", "Número", "Seleção"]
 
 
-  teste = false;
 
-  tornaTrue(): void {
 
-    if (!this.teste) {
-      this.teste = true;
+  tornaTrue(prop): void {
+
+    if (!prop.inputAdd) {
+      prop.inputAdd = true;
 
     } else {
-      this.teste = false;
+      prop.inputAdd = false;
     }
   }
 
 
 
-  // verificarIgualdade(): boolean {
+  verificarIgualdadeNome(): String {
 
-  //   for (const i of this.listaProps) {
-  //     if (i.nome === this.listaProps) {
-  //       return false;
-  //     }
-  //   }
+    for (const i of this.listaProps) {
+      if (i.nome === this.nome) {
+        return i.nome;
+      }
+    }
+  }
 
-  //   return true;
-  // }
+  verificarIgualdadeTipo(): String {
+
+    for (const i of this.listaProps) {
+      if (i.tipo === this.tipo) {
+        return i.tipo;
+      }
+    }
+  }
 
   contraste(cor: string): string {
     const r = parseInt(String(cor).substr(1, 2), 16);
@@ -69,7 +78,8 @@ export class CadastroCategoriaComponent {
       prop = {
         nome: this.nome,
         tipo: this.tipo,
-        conteudo: []
+        conteudo: [],
+        inputAdd: false
       }
 
     }
@@ -79,8 +89,23 @@ export class CadastroCategoriaComponent {
         tipo: this.tipo
       }
     }
-    this.listaProps.push(prop);
-    this.localStorage();
+
+    if(this.nome != ""){
+      if((this.verificarIgualdadeNome() == prop.nome && this.verificarIgualdadeTipo() != prop.tipo) ||
+      this.verificarIgualdadeNome() != prop.nome){
+        
+        this.listaProps.push(prop);
+        this.localStorage();
+      }
+      else {
+        alert("Você está tentando cadastrar uma Propriedade já existente.")
+      }
+    }
+
+
+
+    this.nome = ""
+    this.tipo = ""
   }
 
   cadastrarConteudoInsert(prop: Propriedade): void {

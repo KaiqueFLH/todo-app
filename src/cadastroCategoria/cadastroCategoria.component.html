@@ -50,11 +50,11 @@
                     </div>
 
                     <div *ngIf="prop.tipo === 'Seleção'" class="adicionarSelecao">
-                        <button id="botaoCadastrarSelecao" *ngIf="!teste" (click)="tornaTrue()">Adicionar
+                        <button id="botaoCadastrarSelecao" *ngIf="!prop.inputAdd" (click)="tornaTrue(prop)">Adicionar
                             Propriedade</button>
-                        <input id="inputTextoResult" type="text" [(ngModel)]="conteudoInsert" *ngIf="teste">
+                        <input id="inputTextoResult" type="text" [(ngModel)]="conteudoInsert" *ngIf="prop.inputAdd">
                         <button class="enviarBotao" (click)="cadastrarConteudoInsert(prop)">Enviar</button>
-                        <button id="botaoVoltarSelecao" *ngIf="teste" (click)="tornaTrue()">X</button>
+                        <button id="botaoVoltarSelecao" *ngIf="prop.inputAdd" (click)="tornaTrue(prop)">X</button>
                     </div>
                 </div>
             </div>
