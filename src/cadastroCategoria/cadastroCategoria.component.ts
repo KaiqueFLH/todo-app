@@ -1,4 +1,7 @@
 import { Component } from "@angular/core";
+import { User } from "src/models/users/user";
+import { UserRepository } from "src/repositories/user.repository";
+
 
 interface Propriedade {
   nome: String,
@@ -21,7 +24,7 @@ export class CadastroCategoriaComponent {
     }
   }
 
-  nome: String="";
+  nome: String = "";
   tipo: String;
   conteudo: String[];
   inputAdd: boolean = false;
@@ -30,6 +33,26 @@ export class CadastroCategoriaComponent {
   listaTipos: String[] = ["Texto", "Número", "Seleção"]
 
 
+  private userId: string = 'henrique.santos';
+  private users: User[] = [];
+  user!: User;
+
+  constructor(private userRepository: UserRepository) {
+    this.users = userRepository.getUsers();
+    this.user = this.getUsuarioLogado();
+  }
+
+  hasPermission(permission: string): boolean {
+    return this.user.cardPermissions.some((cardPermission) => {
+      return cardPermission === permission;
+    });
+  }
+
+  getUsuarioLogado(): User {
+    return this.users.find((user) => {
+      return user.id === this.userId
+    }) as User;
+  }
 
 
   tornaTrue(prop): void {
@@ -72,40 +95,52 @@ export class CadastroCategoriaComponent {
 
 
   cadastrarPropriedade(): void {
-    let prop: Propriedade
+    if (this.hasPermission("Add")) {
+      alert("Pode Cadastrar.")
 
-    if (this.tipo == "Seleção") {
-      prop = {
-        nome: this.nome,
-        tipo: this.tipo,
-        conteudo: [],
-        inputAdd: false
-      }
+      let prop: Propriedade
 
-    }
-    else {
-      prop = {
-        nome: this.nome,
-        tipo: this.tipo
-      }
-    }
+      if (this.tipo == "Seleção") {
+        prop = {
+          nome: this.nome,
+          tipo: this.tipo,
+          conteudo: [],
+          inputAdd: false
+        }
 
-    if(this.nome != ""){
-      if((this.verificarIgualdadeNome() == prop.nome && this.verificarIgualdadeTipo() != prop.tipo) ||
-      this.verificarIgualdadeNome() != prop.nome){
-        
-        this.listaProps.push(prop);
-        this.localStorage();
       }
       else {
-        alert("Você está tentando cadastrar uma Propriedade já existente.")
+        prop = {
+          nome: this.nome,
+          tipo: this.tipo
+        }
       }
+
+      if (this.nome != "") {
+        if ((this.verificarIgualdadeNome() == prop.nome && this.verificarIgualdadeTipo() != prop.tipo) ||
+          this.verificarIgualdadeNome() != prop.nome) {
+
+          this.listaProps.push(prop);
+          this.localStorage();
+        }
+        else {
+          alert("Você está tentando cadastrar uma Propriedade já existente.")
+        }
+      }
+      this.nome = ""
+      this.tipo = ""
+
+      return;
     }
+      alert("Não Pode Cadastrar.")
+  }
 
-
-
-    this.nome = ""
-    this.tipo = ""
+  editarTarefa(): void {
+    if (!this.hasPermission('Edit')) {
+      alert('Não pode cadastrar');
+      return;
+    }
+    alert('Pode cadastrar');
   }
 
   cadastrarConteudoInsert(prop: Propriedade): void {
@@ -119,8 +154,15 @@ export class CadastroCategoriaComponent {
   }
 
   removerPropriedade(indice): void {
-    this.listaProps.splice(indice, 1);
-    this.localStorage();
+    if(this.hasPermission("Remove")){
+      alert("Pode Remover.")
+
+      this.listaProps.splice(indice, 1);
+      this.localStorage();
+
+      return;
+    }alert("Não Pode Remover.")
+    
   }
 
   removerConteudoInsert(conteudoInsert: string, prop: Propriedade): void {

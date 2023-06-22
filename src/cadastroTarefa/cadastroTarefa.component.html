@@ -30,7 +30,7 @@
     </div>
     <div style="display: flex; justify-content:center">
       <div>
-        <button class="buttonCadastro" (click)="cadastrarTarefa()">Cadastrar Tarefa</button>
+        <button class="buttonCadastro" [disabled]="!hasPermission('Add')" (click)="cadastrarTarefa()">Cadastrar Tarefa</button>
       </div>
     </div>
   </div>
@@ -60,12 +60,14 @@
 
             <div *ngIf="prop.tipo === 'Número'">
               <p>{{prop.nome}}</p>
-              <input type="text" [(ngModel)]="conteudo">
+              <input type="number" [(ngModel)]="conteudo">
             </div>
 
             <div *ngIf="prop.tipo === 'Seleção'">
               <p>{{prop.nome}}</p>
-              <input type="text" [(ngModel)]="conteudo">
+              <Select>
+                <option *ngFor="let prop of listaProps"> prop.nome</option>
+              </Select>
             </div>
           </div>
 

@@ -2,6 +2,8 @@ import { style } from '@angular/animations';
 import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { E } from '@angular/core/src/render3';
 import { stringify } from 'querystring';
+import { User } from 'src/models/users/user';
+import { UserRepository } from 'src/repositories/user.repository';
 
 interface Tarefas {
   tarefaNome: String,
@@ -31,8 +33,16 @@ export class CadastroTarefaComponent {
     }
 
   }
+  private userId: string = 'henrique.santos';
+  private users: User[] = [];
+  user!: User;
 
-  constructor(private renderer: Renderer2, private el: ElementRef) { }
+  constructor(private renderer: Renderer2, private el: ElementRef,private userRepository: UserRepository) { 
+
+    this.users = this.userRepository.getUsers();
+    this.user = this.getUsuarioLogado();
+    console.log(this.user);
+  }
 
 
   tarefas: Tarefas[] = [];
@@ -81,23 +91,52 @@ export class CadastroTarefaComponent {
 
   cadastrarTarefa(): void {
 
-    const tarefaAdd: Tarefas = {
-      tarefaNome: this.tarefaNome,
-      conteudoTar:this.conteudo,
-      indicenovo:this.indiceNovo
+    if (this.hasPermission('Add')) {
+      alert('Pode cadastrar');
+      const tarefaAdd: Tarefas = {
+        tarefaNome: this.tarefaNome,
+        conteudoTar:this.conteudo,
+        indicenovo:this.indiceNovo
+      }
+      console.log(tarefaAdd)
+  
+      
+          this.tarefas.push(tarefaAdd);
+          this.LocalStorage();
+      this.limparInput();
+      return;
     }
-    console.log(tarefaAdd)
-
     
-        this.tarefas.push(tarefaAdd);
-        this.LocalStorage();
-    this.limparInput();
+    alert('Não Pode cadastrar');
+    
+  }
+
+  editarTarefa(): void {
+    if (!this.hasPermission('Edit')) {
+      alert('Não pode cadastrar');
+      return;
+    }
+    alert('Pode cadastrar');
+  }
+
+
+  hasPermission(permission: string): boolean {
+    return this.user.cardPermissions.some((cardPermission) => {
+      return cardPermission === permission;
+    });
   }
 
 
   removerTarefa(indice): void {
-    this.tarefas.splice(indice, 1)
-    this.LocalStorage()
+
+    if (this.hasPermission('Remove')) {
+      alert('Pode cadastrar');
+      this.tarefas.splice(indice, 1)
+      this.LocalStorage()
+      return;
+    }
+    alert('Não Pode cadastrar');
+    
   }
 
   verificaIgualdade(): boolean {
@@ -174,6 +213,12 @@ export class CadastroTarefaComponent {
   pegaIndice(indice:number,event:Event):void{
     event.preventDefault();
     this.indiceNovo=indice;
+  }
+
+  private getUsuarioLogado(): User {
+    return this.users.find((user) => {
+      return user.id === this.userId
+    }) as User;
   }
 
 }

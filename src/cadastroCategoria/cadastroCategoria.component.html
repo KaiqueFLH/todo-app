@@ -22,7 +22,7 @@
         </div>
 
         <!-- botão responsável por cadastrar a nova propriedade -->
-        <button (click)="cadastrarPropriedade()" id="botaoEnviar">
+        <button [disabled]="!hasPermission('Add')" (click)="cadastrarPropriedade()" id="botaoEnviar">
             Enviar
         </button>
     </div>
