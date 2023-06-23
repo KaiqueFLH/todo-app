@@ -8,6 +8,9 @@ import { CadastroTarefaComponent } from 'src/cadastroTarefa/cadastroTarefa.compo
 import { AppRoutingModule } from 'src/app/app.routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthGuardService } from 'src/services/auth-guard.service';
+import { TesteService } from 'src/services/teste.service';
 
 @NgModule({
   declarations: [
@@ -20,10 +23,13 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [
-    UserRepository
+    UserRepository,
+    AuthGuardService,
+    TesteService
   ],
   bootstrap: [AppComponent]
 })

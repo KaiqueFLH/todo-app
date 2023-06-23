@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { User } from "src/models/users/user";
 import { UserRepository } from "src/repositories/user.repository";
+import { TesteService } from "src/services/teste.service";
 
 
 interface Propriedade {
@@ -37,9 +38,15 @@ export class CadastroCategoriaComponent {
   private users: User[] = [];
   user!: User;
 
-  constructor(private userRepository: UserRepository) {
-    this.users = userRepository.getUsers();
-    this.user = this.getUsuarioLogado();
+  constructor(
+    private userRepository: UserRepository,
+    private testeService: TesteService
+  ) {
+    userRepository.getUsers().subscribe({
+      next: (value) =>{
+        console.log(value)
+      }
+    });
   }
 
   hasPermission(permission: string): boolean {

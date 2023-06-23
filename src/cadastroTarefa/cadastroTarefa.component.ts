@@ -4,6 +4,7 @@ import { E } from '@angular/core/src/render3';
 import { stringify } from 'querystring';
 import { User } from 'src/models/users/user';
 import { UserRepository } from 'src/repositories/user.repository';
+import { TesteService } from 'src/services/teste.service';
 
 interface Tarefas {
   tarefaNome: String,
@@ -37,11 +38,16 @@ export class CadastroTarefaComponent {
   private users: User[] = [];
   user!: User;
 
-  constructor(private renderer: Renderer2, private el: ElementRef,private userRepository: UserRepository) { 
-
-    this.users = this.userRepository.getUsers();
-    this.user = this.getUsuarioLogado();
-    console.log(this.user);
+  constructor(
+    private userRepository: UserRepository,
+    private testeService: TesteService,
+    private el:ElementRef
+  ) {
+    userRepository.getUsers().subscribe({
+      next: (value) =>{
+        console.log(value)
+      }
+    });
   }
 
 

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { User } from 'src/models/users/user';
+import { TesteService } from 'src/services/teste.service';
 import { UserRepository } from 'src/repositories/user.repository';
 
 interface Usuario{
@@ -23,11 +24,20 @@ export class AppComponent {
   user!: User;
 
   constructor(
-    private userRepository: UserRepository
+    private userRepository: UserRepository,
+    private testeService: TesteService
   ) {
-    this.users = this.userRepository.getUsers();
-    this.user = this.getUsuarioLogado();
-    console.log(this.user);
+    userRepository.getUsers().subscribe({
+      next: (value) =>{
+        console.log(value)
+      }
+    });
+
+    testeService.getTema().subscribe({
+      next: (tema) => {
+        console.log(tema);
+      }
+    })
   }
 
   adicionarTarefa(): void {
