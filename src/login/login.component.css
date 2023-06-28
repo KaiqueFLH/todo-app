@@ -1,0 +1,94 @@
+@font-face {
+    font-family: Batman1;
+    src: url(../app/fontes/batmfa__.ttf);
+}
+
+body,html{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background:url("../imagens/fundo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#sectionLogin{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#quadradoLogin{
+    width: 500px;
+    height: 600px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+}
+
+#divH2{
+    height: 22%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: Batman1;
+    
+}
+
+#h3Login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+}
+
+#divInputsLogin{
+    width: 100%;
+    height:65%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#inputID{
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+#inputSenha{
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+#btnEntrar{
+    width: 100px;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#divPCadastro{
+    width: 100%;
+    position: absolute;
+    top: 80vh;
+    right: 42%;
+}
+
+#pCadastro{
+    text-align: end;
+    font-size: 13px;
+}

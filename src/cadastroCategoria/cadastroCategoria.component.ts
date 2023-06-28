@@ -33,34 +33,42 @@ export class CadastroCategoriaComponent {
   listaProps: Propriedade[] = [];
   listaTipos: String[] = ["Texto", "Número", "Seleção"]
 
-
-  private userId: string = 'henrique.santos';
-  private users: User[] = [];
+  
+  userId="diogo.defante"
+  users:User[]=[];
   user!: User;
 
   constructor(
     private userRepository: UserRepository,
-    private testeService: TesteService
+    private testeService: TesteService,
   ) {
     userRepository.getUsers().subscribe({
-      next: (value) =>{
-        console.log(value)
+      next: (value) => {
+        this.users=value;
+        this.user=this.getUsuarioLogado();
       }
     });
   }
 
-  hasPermission(permission: string): boolean {
-    return this.user.cardPermissions.some((cardPermission) => {
-      return cardPermission === permission;
-    });
-  }
-
-  getUsuarioLogado(): User {
+  private getUsuarioLogado(): User {
     return this.users.find((user) => {
       return user.id === this.userId
     }) as User;
   }
 
+  hasPermission(permission: string): boolean {
+    if(User==undefined){
+      return this.user.cardPermissions.some((cardPermission) => 
+        cardPermission === permission);
+    }
+      return false;
+
+  }
+  // getUsuarioLogado(): User {
+  //   return this.users.find((user) => {
+  //     return user.id === this.userId
+  //   }) as User;
+  // }
 
   tornaTrue(prop): void {
 

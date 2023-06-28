@@ -1,3 +1,36 @@
-<p>
-  login works!
-</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <section id="sectionLogin">
+    <div id="quadradoLogin">
+
+      <div id="divH2">
+        <h2 id="h2Todo">TODO-APP</h2>
+        <h3 id="h3Login">LOGIN</h3>
+      </div>
+
+      <div id="divInputsLogin">
+        
+        <input [(ngModel)]="id" id="inputID" type="text" placeholder="Informe o seu ID: ">
+        <input [(ngModel)]="senha" id="inputSenha" type="text" placeholder="Informe a sua Senha: ">
+        <button id="btnEntrar" (click)="fazLogin()">Entrar</button>
+        
+          <div id="divPCadastro">
+            <p id="pCadastro">Não possui Login? Cadastre-se Agora!</p>
+          </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+
+</html>

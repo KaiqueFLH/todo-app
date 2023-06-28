@@ -9,8 +9,11 @@
 </head>
 
 <body>
+  <app-header></app-header>
+  
+  <!--  -->
 
-  <div>
+  
     <div class="divAcimaInput">
       <div class="divInputs">
         <input class="button" type="text" placeholder="Tarefa:" maxlength="24" [(ngModel)]="tarefaNome">
@@ -31,7 +34,7 @@
         <button class="buttonCadastro" [disabled]="!hasPermission('Add')" (click)="cadastrarTarefa()">Cadastrar Tarefa</button>
       </div>
     </div>
-  </div>
+  
 
 
 

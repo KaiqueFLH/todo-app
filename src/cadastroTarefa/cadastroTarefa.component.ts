@@ -8,10 +8,10 @@ import { TesteService } from 'src/services/teste.service';
 
 interface Tarefas {
   tarefaNome: String,
-  conteudoTar:String | number,
-  indicenovo:number
+  conteudoTar: String | number,
+  indicenovo: number
 }
-interface Propriedade{
+interface Propriedade {
   nome: String,
   tipo: String,
   conteudo: String | number,
@@ -34,18 +34,20 @@ export class CadastroTarefaComponent {
     }
 
   }
-  private userId: string = 'henrique.santos';
-  private users: User[] = [];
+  
+  userId="diogo.defante"
+  users:User[]=[];
   user!: User;
 
   constructor(
     private userRepository: UserRepository,
     private testeService: TesteService,
-    private el:ElementRef
+    private el: ElementRef
   ) {
     userRepository.getUsers().subscribe({
-      next: (value) =>{
-        console.log(value)
+      next: (value) => {
+        this.users=value;
+        this.user=this.getUsuarioLogado();
       }
     });
   }
@@ -56,31 +58,31 @@ export class CadastroTarefaComponent {
   valor: string | number;
   tarefaNome: String = null;
   prop: Propriedade = null;
-  prop2:String = null;
+  prop2: String = null;
   descricao: String = null;
   tarefaDrop: Tarefas;
-  propriedadeDrop:String;
+  propriedadeDrop: String;
   conteudoTar: String | number;
-  indiceNovo:number
+  indiceNovo: number
 
-  nome: String="";
+  nome: String = "";
   tipo: String = "";
-  conteudo: String | number  = null;
+  conteudo: String | number = null;
   inputAdd: boolean = false;
   conteudoInsert: String;
   listaTipos: String[] = ["Texto", "Número", "Seleção"]
-  
+
 
   tarefa: Tarefas = {
     tarefaNome: "",
     conteudoTar: null,
-    indicenovo:0
+    indicenovo: 0
   }
 
   propriedade: Propriedade = {
     nome: this.nome,
     tipo: this.tipo,
-    conteudo:this.conteudo
+    conteudo: this.conteudo
   }
 
   teste = false;
@@ -101,20 +103,20 @@ export class CadastroTarefaComponent {
       alert('Pode cadastrar');
       const tarefaAdd: Tarefas = {
         tarefaNome: this.tarefaNome,
-        conteudoTar:this.conteudo,
-        indicenovo:this.indiceNovo
+        conteudoTar: this.conteudo,
+        indicenovo: this.indiceNovo
       }
       console.log(tarefaAdd)
-  
-      
-          this.tarefas.push(tarefaAdd);
-          this.LocalStorage();
+
+
+      this.tarefas.push(tarefaAdd);
+      this.LocalStorage();
       this.limparInput();
       return;
     }
-    
+
     alert('Não Pode cadastrar');
-    
+
   }
 
   editarTarefa(): void {
@@ -127,9 +129,14 @@ export class CadastroTarefaComponent {
 
 
   hasPermission(permission: string): boolean {
-    return this.user.cardPermissions.some((cardPermission) => {
-      return cardPermission === permission;
-    });
+    if (User === undefined) {
+      return this.user.cardPermissions.some((cardPermission) =>
+        cardPermission === permission
+      );
+    }
+
+    return false;
+
   }
 
 
@@ -142,7 +149,7 @@ export class CadastroTarefaComponent {
       return;
     }
     alert('Não Pode cadastrar');
-    
+
   }
 
   verificaIgualdade(): boolean {
@@ -167,7 +174,7 @@ export class CadastroTarefaComponent {
 
   limparInput(): void {
     this.tarefaNome = '';
-    this.descricao=''
+    this.descricao = ''
     this.prop = null;
     this.prop2 = '';
   }
@@ -188,20 +195,20 @@ export class CadastroTarefaComponent {
     return luz > 128 ? '#000' : '#fff'
   }
 
-  dragover(propD:Propriedade, event:Event):void{
+  dragover(propD: Propriedade, event: Event): void {
     event.preventDefault();
     // console.log("a")
-    this.propriedadeDrop = propD.nome;    
+    this.propriedadeDrop = propD.nome;
   }
 
-  drag(tarefaD:Tarefas):void{
+  drag(tarefaD: Tarefas): void {
     this.tarefaDrop = tarefaD
-    
+
     console.log(this.tarefaDrop)
   }
 
 
-  drop(event:Event):void{
+  drop(event: Event): void {
     event.preventDefault();
 
     this.tarefaDrop.tarefaNome = this.propriedadeDrop;
@@ -209,16 +216,16 @@ export class CadastroTarefaComponent {
     this.ajustarPosicao();
   }
 
-  ajustarPosicao():void{
+  ajustarPosicao(): void {
     this.tarefas.splice(this.tarefas.indexOf(this.tarefaDrop), 1);
     this.tarefas.splice(this.indiceNovo, 0, this.tarefaDrop);
 
     this.LocalStorage();
   }
 
-  pegaIndice(indice:number,event:Event):void{
+  pegaIndice(indice: number, event: Event): void {
     event.preventDefault();
-    this.indiceNovo=indice;
+    this.indiceNovo = indice;
   }
 
   private getUsuarioLogado(): User {

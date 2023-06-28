@@ -11,13 +11,15 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuardService } from 'src/services/auth-guard.service';
 import { TesteService } from 'src/services/teste.service';
+import { HeaderComponent } from '../header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     CadastroCategoriaComponent,
-    CadastroTarefaComponent
+    CadastroTarefaComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
