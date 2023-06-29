@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthGuardService } from 'src/services/auth-guard.service';
 import { TesteService } from 'src/services/teste.service';
 import { HeaderComponent } from '../header/header.component';
+import { CadastroUsuarioComponent } from '../cadastro-usuario/cadastro-usuario.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HeaderComponent } from '../header/header.component';
     LoginComponent,
     CadastroCategoriaComponent,
     CadastroTarefaComponent,
-    HeaderComponent
+    HeaderComponent,
+    CadastroUsuarioComponent
   ],
   imports: [
     BrowserModule,

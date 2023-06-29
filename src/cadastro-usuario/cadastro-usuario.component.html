@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <section id="sectionLogin">
+    <div id="quadradoLogin">
+
+      <div id="divH2">
+        <h2 id="h2Todo">TODO-APP</h2>
+        <h3 id="h3Login">CaDaSTRO</h3>
+      </div>
+
+      <div id="divInputsLogin">
+        
+        <input [(ngModel)]="nome" id="inputID" type="text" placeholder="Informe o seu Nome: ">
+        <input [(ngModel)]="id" id="inputID" type="text" placeholder="Username: ">
+        <input [(ngModel)]="senha" id="inputSenha" type="text" placeholder="Informe a sua Senha: ">
+        <input [(ngModel)]="email" id="inputID" type="text" placeholder="Informe o seu E-mail: ">
+        <button id="btnEntrar" (click)="fazLogin()">Entrar</button>
+        
+          <div id="divPCadastro">
+            <p id="pCadastro">Já possui Login? Aproveite Agora!</p>
+          </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+
+</html>
