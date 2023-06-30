@@ -22,10 +22,10 @@
         
         <input [(ngModel)]="id" id="inputID" type="text" placeholder="Informe o seu ID: ">
         <input [(ngModel)]="senha" id="inputSenha" type="text" placeholder="Informe a sua Senha: ">
-        <button id="btnEntrar" (click)="fazLogin()">Entrar</button>
+        <button id="btnEntrar" (click)="fazerLogin()">Entrar</button>
         
           <div id="divPCadastro">
-            <p id="pCadastro">Não possui Login? Cadastre-se Agora!</p>
+            <p id="pCadastro" (click)="chamaCadastro()">Não possui Login? Cadastre-se Agora!</p>
           </div>
       </div>
     </div>

@@ -85,10 +85,15 @@ body,html{
     width: 100%;
     position: absolute;
     top: 80vh;
-    right: 43%;
 }
 
 #pCadastro{
-    text-align: end;
+    text-align: center;
     font-size: 13px;
+    cursor: pointer;
+    text-decoration: underline;
+
+}
+#pCadastro:hover{
+    color: blue;
 }

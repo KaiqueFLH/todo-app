@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/models/users/user';
+import { UserRepository } from 'src/repositories/user.repository';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -6,10 +9,61 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cadastro-usuario.component.css']
 })
 export class CadastroUsuarioComponent implements OnInit {
-
-  constructor() { }
-
+  users: User[];
   ngOnInit() {
+  }
+  id: string;
+  nome: string;
+  senha: string;
+  email: string;
+
+
+
+  constructor(private httpClient: HttpClient, private userRepository: UserRepository) {
+    userRepository.getUsers().subscribe({
+      next: (value) => {
+        this.users = value;
+      }
+    });
+  }
+
+  cadastrar(): void {
+    const usuario: User = {
+      id: this.id,
+      nome: this.nome,
+      senha: this.senha,
+      email: this.email,
+      groups: [],
+      cardPermissions: [],
+      propertiesPermissions: []
+    }
+
+    this.users.forEach(element => {
+      if (element.id == this.id) {
+        alert("usuario já cadastrado.")
+      }
+      else {
+        this.httpClient.post<User[]>("http://localhost:4300/usuarios", usuario)
+          .subscribe((req) => {
+          })
+        this.id = "";
+        this.nome = "";
+        this.senha = "";
+        this.email = "";
+
+        alert("Usuário Cadastrado com Sucesso!");
+        window.location.replace("http://localhost:4200/login")
+      }
+    });
+
+
+
+
+
+  }
+
+  chamaLogin(): void {
+    window.location.replace("http://localhost:4200/login")
   }
 
 }
