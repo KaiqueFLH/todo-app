@@ -27,7 +27,10 @@ export class CadastroUsuarioComponent implements OnInit {
     });
   }
 
+
   cadastrar(): void {
+    let cadastrado: boolean = true;
+
     const usuario: User = {
       id: this.id,
       nome: this.nome,
@@ -38,29 +41,36 @@ export class CadastroUsuarioComponent implements OnInit {
       propertiesPermissions: []
     }
 
+
     this.users.forEach(element => {
       if (element.id == this.id) {
-        alert("usuario já cadastrado.")
-      }
-      else {
-        this.httpClient.post<User[]>("http://localhost:4300/usuarios", usuario)
-          .subscribe((req) => {
-          })
+        alert("Usuário já foi cadastrado. Cadastre um novo Usuário");
         this.id = "";
         this.nome = "";
         this.senha = "";
         this.email = "";
-
-        alert("Usuário Cadastrado com Sucesso!");
-        window.location.replace("http://localhost:4200/login")
+        cadastrado = false
       }
     });
 
 
 
+    if (cadastrado == true) {
+      this.httpClient.post<User[]>("http://localhost:4300/usuarios", usuario)
+        .subscribe((req) => {
+        })
+      this.id = "";
+      this.nome = "";
+      this.senha = "";
+      this.email = "";
 
+      alert("Usuário Cadastrado com Sucesso!");
+      window.location.replace("http://localhost:4200/login")
+      cadastrado = false;
+    }
 
   }
+
 
   chamaLogin(): void {
     window.location.replace("http://localhost:4200/login")

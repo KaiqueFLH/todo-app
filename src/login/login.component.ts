@@ -57,8 +57,8 @@ export class LoginComponent implements OnInit {
       if(element.id == this.id && element.senha==this.senha){
         window.location.replace("http://localhost:4200/cadastrarTarefas")
       }
+     
     });
-
   }
 
   chamaCadastro():void{
