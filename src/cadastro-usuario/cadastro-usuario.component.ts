@@ -12,10 +12,10 @@ export class CadastroUsuarioComponent implements OnInit {
   users: User[];
   ngOnInit() {
   }
-  id: string;
-  nome: string;
-  senha: string;
-  email: string;
+  id: string="";
+  nome: string="";
+  senha: string="";
+  email: string="";
 
 
 
@@ -45,6 +45,15 @@ export class CadastroUsuarioComponent implements OnInit {
     this.users.forEach(element => {
       if (element.id == this.id) {
         alert("Usuário já foi cadastrado. Cadastre um novo Usuário");
+        this.id = "";
+        this.nome = "";
+        this.senha = "";
+        this.email = "";
+        cadastrado = false
+      }
+
+      if(this.id=="" || this.nome=="" || this.senha=="" || this.email==""){
+        alert("Um Usuário não pode ser Cadastrado com Informações Faltando!")
         this.id = "";
         this.nome = "";
         this.senha = "";

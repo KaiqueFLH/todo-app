@@ -4,9 +4,10 @@ import { CadastroUsuarioComponent } from "src/cadastro-usuario/cadastro-usuario.
 import { CadastroCategoriaComponent } from "src/cadastroCategoria/cadastroCategoria.component";
 import { CadastroTarefaComponent } from "src/cadastroTarefa/cadastroTarefa.component";
 import { LoginComponent } from "src/login/login.component";
+import { AuthGuardService } from "src/services/auth-guard.service";
 
 const rotas: Routes=[
-{path:'cadastrarTarefas', component:CadastroTarefaComponent},
+{path:'cadastrarTarefas', component:CadastroTarefaComponent, canActivate:[AuthGuardService]},
 {path:'cadastrarCategorias', component:CadastroCategoriaComponent},
 {path:'login', component:LoginComponent},
 {path:'cadastroUsuario', component:CadastroUsuarioComponent},

@@ -20,9 +20,28 @@ interface Propriedade {
 export class CadastroCategoriaComponent {
 
   ngOnInit(): void {
-    if (localStorage.getItem('listaProps') != null) {
-      this.listaProps = JSON.parse(localStorage.getItem('listaProps'));
+    if (this.getCookie('listaProps') != null) {
+      this.listaProps = JSON.parse(this.getCookie('listaProps'));
     }
+
+  }
+
+  getCookie(name: string): string | null {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.startsWith(name + '=')) {
+        return cookie.substring(name.length + 1);
+      }
+    }
+    return null;
+  }
+
+  setCookie(name: string, value: string, expirationDays: number): void {
+    const date = new Date();
+    date.setTime(date.getTime() + (expirationDays * 24 * 60 * 60 * 1000));
+    const expires = 'expires=' + date.toUTCString();
+    document.cookie = name + '=' + value + ';' + expires + ';path=/';
   }
 
   nome: String = "";
@@ -56,14 +75,15 @@ export class CadastroCategoriaComponent {
     }) as User;
   }
 
-  hasPermission(permission: string): boolean {
-    if(User==undefined){
-      return this.user.cardPermissions.some((cardPermission) => 
-        cardPermission === permission);
-    }
-      return false;
+  // hasPermission(permission: string): boolean {
+  //   if(User==undefined){
+  //     return this.user.cardPermissions.some((cardPermission) => 
+  //       cardPermission === permission);
+  //   }
+  //     return false;
 
-  }
+  // }
+
   // getUsuarioLogado(): User {
   //   return this.users.find((user) => {
   //     return user.id === this.userId
@@ -110,7 +130,7 @@ export class CadastroCategoriaComponent {
 
 
   cadastrarPropriedade(): void {
-    if (this.hasPermission("Add")) {
+    // if (this.hasPermission("Add")) {
       alert("Pode Cadastrar.")
 
       let prop: Propriedade
@@ -136,7 +156,7 @@ export class CadastroCategoriaComponent {
           this.verificarIgualdadeNome() != prop.nome) {
 
           this.listaProps.push(prop);
-          this.localStorage();
+          this.cookieFunction();
         }
         else {
           alert("Você está tentando cadastrar uma Propriedade já existente.")
@@ -146,17 +166,17 @@ export class CadastroCategoriaComponent {
       this.tipo = ""
 
       return;
-    }
+    // }
       alert("Não Pode Cadastrar.")
   }
 
-  editarTarefa(): void {
-    if (!this.hasPermission('Edit')) {
-      alert('Não pode cadastrar');
-      return;
-    }
-    alert('Pode cadastrar');
-  }
+  // editarTarefa(): void {
+  //   if (!this.hasPermission('Edit')) {
+  //     alert('Não pode cadastrar');
+  //     return;
+  //   }
+  //   alert('Pode cadastrar');
+  // }
 
   cadastrarConteudoInsert(prop: Propriedade): void {
     console.log(prop.conteudo)
@@ -165,18 +185,19 @@ export class CadastroCategoriaComponent {
       this.conteudoInsert = '';
     }
 
-    this.localStorage();
+    this.cookieFunction();
   }
 
   removerPropriedade(indice): void {
-    if(this.hasPermission("Remove")){
+    // if(this.hasPermission("Remove")){
       alert("Pode Remover.")
 
       this.listaProps.splice(indice, 1);
-      this.localStorage();
+      this.cookieFunction();
 
       return;
-    }alert("Não Pode Remover.")
+    // }
+    alert("Não Pode Remover.")
     
   }
 
@@ -184,11 +205,11 @@ export class CadastroCategoriaComponent {
     prop.conteudo.splice(prop.conteudo.indexOf(conteudoInsert), 1);
     this.conteudoInsert = '';
 
-    this.localStorage();
+    this.cookieFunction();
   }
 
-  localStorage(): void {
-    return localStorage.setItem("listaProps", JSON.stringify(this.listaProps));
+  cookieFunction() {
+    this.setCookie("Lista de Propriedades", JSON.stringify(this.listaProps),10)
   }
 
 

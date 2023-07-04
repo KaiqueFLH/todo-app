@@ -26,13 +26,31 @@ interface Propriedade {
 
 export class CadastroTarefaComponent {
   ngOnInit(): void {
-    if (localStorage.getItem('Lista de Tarefas') != null) {
-      this.tarefas = JSON.parse(localStorage.getItem('Lista de Tarefas'));
+    if (this.getCookie('Lista de Tarefas') != null) {
+      this.tarefas = JSON.parse(this.getCookie('Lista de Tarefas'));
     }
-    if (localStorage.getItem('listaProps') != null) {
-      this.listaProps = JSON.parse(localStorage.getItem('listaProps'));
+    if (this.getCookie('listaProps') != null) {
+      this.listaProps = JSON.parse(this.getCookie('listaProps'));
     }
 
+  }
+
+  getCookie(name: string): string | null {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.startsWith(name + '=')) {
+        return cookie.substring(name.length + 1);
+      }
+    }
+    return null;
+  }
+
+  setCookie(name: string, value: string, expirationDays: number): void {
+    const date = new Date();
+    date.setTime(date.getTime() + (expirationDays * 24 * 60 * 60 * 1000));
+    const expires = 'expires=' + date.toUTCString();
+    document.cookie = name + '=' + value + ';' + expires + ';path=/';
   }
   
   userId="diogo.defante"
@@ -99,7 +117,7 @@ export class CadastroTarefaComponent {
 
   cadastrarTarefa(): void {
 
-    if (this.hasPermission('Add')) {
+    // if (this.hasPermission('Add')) {
       alert('Pode cadastrar');
       const tarefaAdd: Tarefas = {
         tarefaNome: this.tarefaNome,
@@ -110,44 +128,44 @@ export class CadastroTarefaComponent {
 
 
       this.tarefas.push(tarefaAdd);
-      this.LocalStorage();
+      this.cookieFunction();
       this.limparInput();
       return;
-    }
+    // }
 
     alert('Não Pode cadastrar');
 
   }
 
-  editarTarefa(): void {
-    if (!this.hasPermission('Edit')) {
-      alert('Não pode cadastrar');
-      return;
-    }
-    alert('Pode cadastrar');
-  }
+  // editarTarefa(): void {
+  //   if (!this.hasPermission('Edit')) {
+  //     alert('Não pode cadastrar');
+  //     return;
+  //   }
+  //   alert('Pode cadastrar');
+  // }
 
 
-  hasPermission(permission: string): boolean {
-    if (User === undefined) {
-      return this.user.cardPermissions.some((cardPermission) =>
-        cardPermission === permission
-      );
-    }
+  // hasPermission(permission: string): boolean {
+  //   if (User === undefined) {
+  //     return this.user.cardPermissions.some((cardPermission) =>
+  //       cardPermission === permission
+  //     );
+  //   }
 
-    return false;
+  //   return false;
 
-  }
+  // }
 
 
   removerTarefa(indice): void {
 
-    if (this.hasPermission('Remove')) {
+    // if (this.hasPermission('Remove')) {
       alert('Pode cadastrar');
       this.tarefas.splice(indice, 1)
-      this.LocalStorage()
+      this.cookieFunction()
       return;
-    }
+    // }
     alert('Não Pode cadastrar');
 
   }
@@ -161,14 +179,14 @@ export class CadastroTarefaComponent {
     return true;
   }
 
-  LocalStorage() {
-    localStorage.setItem("Lista de Tarefas", JSON.stringify(this.tarefas))
+  cookieFunction() {
+    this.setCookie("Lista de Tarefas", JSON.stringify(this.tarefas),10)
   }
 
   alterarPropriedade(tarefa): void {
     tarefa.prop = this.prop2;
     tarefa.showProp = false;
-    this.LocalStorage();
+    this.cookieFunction();
     this.limparInput();
   }
 
@@ -220,7 +238,7 @@ export class CadastroTarefaComponent {
     this.tarefas.splice(this.tarefas.indexOf(this.tarefaDrop), 1);
     this.tarefas.splice(this.indiceNovo, 0, this.tarefaDrop);
 
-    this.LocalStorage();
+    this.cookieFunction();
   }
 
   pegaIndice(indice: number, event: Event): void {
