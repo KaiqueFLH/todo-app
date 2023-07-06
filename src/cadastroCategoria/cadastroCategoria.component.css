@@ -1,3 +1,8 @@
+@font-face {
+    font-family: Batman1;
+    src: url(../app/fontes/batmfa__.ttf);
+}
+
 body,html{
     margin: 0;
     padding: 0;

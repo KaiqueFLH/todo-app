@@ -26,32 +26,32 @@ interface Propriedade {
 
 export class CadastroTarefaComponent {
   ngOnInit(): void {
-    if (this.getCookie('Lista de Tarefas') != null) {
-      this.tarefas = JSON.parse(this.getCookie('Lista de Tarefas'));
+    if (localStorage.getItem('Lista de Tarefas') != null) {
+      this.tarefas = JSON.parse(localStorage.getItem('Lista de Tarefas'));
     }
-    if (this.getCookie('listaProps') != null) {
-      this.listaProps = JSON.parse(this.getCookie('listaProps'));
+    if (localStorage.getItem('listaProps') != null) {
+      this.listaProps = JSON.parse(localStorage.getItem('listaProps'));
     }
 
   }
 
-  getCookie(name: string): string | null {
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      if (cookie.startsWith(name + '=')) {
-        return cookie.substring(name.length + 1);
-      }
-    }
-    return null;
-  }
+  // getCookie(name: string): string | null {
+  //   const cookies = document.cookie.split(';');
+  //   for (let i = 0; i < cookies.length; i++) {
+  //     const cookie = cookies[i].trim();
+  //     if (cookie.startsWith(name + '=')) {
+  //       return cookie.substring(name.length + 1);
+  //     }
+  //   }
+  //   return null;
+  // }
 
-  setCookie(name: string, value: string, expirationDays: number): void {
-    const date = new Date();
-    date.setTime(date.getTime() + (expirationDays * 24 * 60 * 60 * 1000));
-    const expires = 'expires=' + date.toUTCString();
-    document.cookie = name + '=' + value + ';' + expires + ';path=/';
-  }
+  // setCookie(name: string, value: string, expirationDays: number): void {
+  //   const date = new Date();
+  //   date.setTime(date.getTime() + (expirationDays * 24 * 60 * 60 * 1000));
+  //   const expires = 'expires=' + date.toUTCString();
+  //   document.cookie = name + '=' + value + ';' + expires + ';path=/';
+  // }
   
   userId="diogo.defante"
   users:User[]=[];
@@ -128,13 +128,16 @@ export class CadastroTarefaComponent {
 
 
       this.tarefas.push(tarefaAdd);
-      this.cookieFunction();
+      this.LocalStorage();
       this.limparInput();
       return;
     // }
 
     alert('Não Pode cadastrar');
 
+  }
+  LocalStorage() {
+    localStorage.setItem("Lista de Tarefas","tarefas")
   }
 
   // editarTarefa(): void {
@@ -180,7 +183,7 @@ export class CadastroTarefaComponent {
   }
 
   cookieFunction() {
-    this.setCookie("Lista de Tarefas", JSON.stringify(this.tarefas),10)
+    localStorage.setItem("Lista de Tarefas", JSON.stringify(this.tarefas));
   }
 
   alterarPropriedade(tarefa): void {

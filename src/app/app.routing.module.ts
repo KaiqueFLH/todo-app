@@ -8,10 +8,10 @@ import { AuthGuardService } from "src/services/auth-guard.service";
 
 const rotas: Routes=[
 {path:'cadastrarTarefas', component:CadastroTarefaComponent, canActivate:[AuthGuardService]},
-{path:'cadastrarCategorias', component:CadastroCategoriaComponent},
+{path:'cadastrarCategorias', component:CadastroCategoriaComponent, canActivate: [AuthGuardService]},
 {path:'login', component:LoginComponent},
 {path:'cadastroUsuario', component:CadastroUsuarioComponent},
-{path:'',redirectTo:'cadastroUsuario',pathMatch:'full'}
+{path:'',redirectTo:'login',pathMatch:'full'}
 
 ];
 

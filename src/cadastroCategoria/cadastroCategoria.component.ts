@@ -20,8 +20,8 @@ interface Propriedade {
 export class CadastroCategoriaComponent {
 
   ngOnInit(): void {
-    if (this.getCookie('listaProps') != null) {
-      this.listaProps = JSON.parse(this.getCookie('listaProps'));
+    if (localStorage.getItem('listaProps') != null) {
+      this.listaProps = JSON.parse(localStorage.getItem('listaProps'));
     }
 
   }
@@ -209,7 +209,7 @@ export class CadastroCategoriaComponent {
   }
 
   cookieFunction() {
-    this.setCookie("Lista de Propriedades", JSON.stringify(this.listaProps),10)
+    return localStorage.setItem("listaProps", JSON.stringify(this.listaProps));
   }
 
 

@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'src/services/cookieService';
 import { User } from 'src/models/users/user';
 import { UserRepository } from 'src/repositories/user.repository';
 import { TesteService } from 'src/services/teste.service';
+import { Router } from '@angular/router';
 
 interface Usuario{
   id: string,
@@ -19,8 +21,8 @@ export class LoginComponent implements OnInit {
   email: string;
 
   ngOnInit(): void {
-    if (localStorage.getItem('users') != null) {
-      this.users = JSON.parse(localStorage.getItem('users'));
+    if (this.cookieService.get('Logado') != null) {
+      this.users = JSON.parse(localStorage.getItem('Logado'));
     }
   }
 
@@ -35,7 +37,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private userRepository: UserRepository,
     private testeService: TesteService,
-    private httpClient:HttpClient
+    private httpClient:HttpClient,
+    private cookieService:CookieService,
+    private router: Router
   ) {
     userRepository.getUsers().subscribe({
       next: (value) => {
@@ -55,10 +59,12 @@ export class LoginComponent implements OnInit {
 
     this.users.forEach(element => {
       if(element.id == this.id && element.senha==this.senha){
-        window.location.replace("http://localhost:4200/cadastrarTarefas")
+        this.router.navigate(['/cadastrarTarefas'])
       }
-     
     });
+
+    this.cookieService.set("Logado","true")
+    // console.log(this.getCookie("Logado")); 
   }
 
   chamaCadastro():void{
