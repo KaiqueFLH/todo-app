@@ -3,8 +3,10 @@ import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { E } from '@angular/core/src/render3';
 import { stringify } from 'querystring';
 import { User } from 'src/models/users/user';
+import { CardsPermissions } from "src/models/cardsPermission"
 import { UserRepository } from 'src/repositories/user.repository';
 import { TesteService } from 'src/services/teste.service';
+import { CardsRepository } from 'src/repositories/cards.repository';
 
 interface Tarefas {
   tarefaNome: String,
@@ -35,37 +37,28 @@ export class CadastroTarefaComponent {
 
   }
 
-  // getCookie(name: string): string | null {
-  //   const cookies = document.cookie.split(';');
-  //   for (let i = 0; i < cookies.length; i++) {
-  //     const cookie = cookies[i].trim();
-  //     if (cookie.startsWith(name + '=')) {
-  //       return cookie.substring(name.length + 1);
-  //     }
-  //   }
-  //   return null;
-  // }
-
-  // setCookie(name: string, value: string, expirationDays: number): void {
-  //   const date = new Date();
-  //   date.setTime(date.getTime() + (expirationDays * 24 * 60 * 60 * 1000));
-  //   const expires = 'expires=' + date.toUTCString();
-  //   document.cookie = name + '=' + value + ';' + expires + ';path=/';
-  // }
-  
-  userId="diogo.defante"
-  users:User[]=[];
+  userId = "diogo.defante"
+  users: User[] = [];
   user!: User;
+  lista: CardsPermissions[] = []
 
   constructor(
     private userRepository: UserRepository,
     private testeService: TesteService,
+    private cardsRepository: CardsRepository,
     private el: ElementRef
   ) {
     userRepository.getUsers().subscribe({
       next: (value) => {
-        this.users=value;
-        this.user=this.getUsuarioLogado();
+        this.users = value;
+        this.user = this.getUsuarioLogado();
+      }
+    });
+
+    cardsRepository.getCards().subscribe({
+      next: (value) => {
+        this.lista = value
+        console.log(value)
       }
     });
   }
@@ -117,7 +110,7 @@ export class CadastroTarefaComponent {
 
   cadastrarTarefa(): void {
 
-    // if (this.hasPermission('Add')) {
+    if (this.hasPermission('Add')) {
       alert('Pode cadastrar');
       const tarefaAdd: Tarefas = {
         tarefaNome: this.tarefaNome,
@@ -131,13 +124,13 @@ export class CadastroTarefaComponent {
       this.LocalStorage();
       this.limparInput();
       return;
-    // }
+    }
 
     alert('Não Pode cadastrar');
 
   }
   LocalStorage() {
-    localStorage.setItem("Lista de Tarefas","tarefas")
+    localStorage.setItem("Lista de Tarefas", "tarefas")
   }
 
   // editarTarefa(): void {
@@ -149,26 +142,27 @@ export class CadastroTarefaComponent {
   // }
 
 
-  // hasPermission(permission: string): boolean {
-  //   if (User === undefined) {
-  //     return this.user.cardPermissions.some((cardPermission) =>
-  //       cardPermission === permission
-  //     );
-  //   }
+  hasPermission(permission: string): boolean {
 
-  //   return false;
+    for (const permissao of this.lista) {
+      if (permissao.permission == permission &&
+        permissao.id_usuario == this.user.id) {
+        return true
+      }
+    }
+    return false;
 
-  // }
+  }
 
 
   removerTarefa(indice): void {
 
-    // if (this.hasPermission('Remove')) {
+    if (this.hasPermission('Remove')) {
       alert('Pode cadastrar');
       this.tarefas.splice(indice, 1)
       this.cookieFunction()
       return;
-    // }
+    }
     alert('Não Pode cadastrar');
 
   }
@@ -249,7 +243,7 @@ export class CadastroTarefaComponent {
     this.indiceNovo = indice;
   }
 
-  private getUsuarioLogado(): User {
+  private   getUsuarioLogado(): User {
     return this.users.find((user) => {
       return user.id === this.userId
     }) as User;
